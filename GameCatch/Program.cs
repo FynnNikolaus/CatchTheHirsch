@@ -6,13 +6,10 @@ namespace GameCatch
     {
         static void Main(string[] args)
         {
-            showlayout();   
-
-            var input = Console.ReadLine();
-            Console.WriteLine("you have entered: " + input);
-
+            
             showlayout();
-
+            KeyReading();
+            
         }
 
         static void showlayout()
@@ -27,8 +24,47 @@ namespace GameCatch
             Console.WriteLine("   #                     #");
             Console.WriteLine("   #                     #");
             Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
+            Console.WriteLine("   # 1                   #");
             Console.WriteLine("   # # # # # # # # # # # #");
         }
+
+        static void KeyReading()
+        {
+            var MovementInput = Console.ReadKey();
+
+            if (MovementInput.Key == ConsoleKey.W)
+            {
+                Console.Clear(); // Erneuerung
+                Console.WriteLine("                          ");
+                Console.WriteLine("   # # # # # # # # # # # #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   # 1                   #");
+                Console.WriteLine("   #                     #");
+                Console.WriteLine("   # # # # # # # # # # # #");
+
+            }
+
+            while (MovementInput.Key != ConsoleKey.W)
+            {
+                Console.WriteLine("Please press a valid button!");
+                break;  
+            }
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }
