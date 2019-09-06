@@ -4,29 +4,26 @@ namespace GameCatch
 {
     class Program
     {
-        static void Main(string[] args)
+        static void showlayout(string[] args)
         {
-            
-            showlayout();
-            KeyReading();
-            
-        }
-
-        static void showlayout()
-        {
+            Console.WriteLine("");
             Console.WriteLine("                          ");
             Console.WriteLine("   \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551                     \u2551");
-            Console.WriteLine("   \u2551 1                   \u2551");
+            for (int A = 0; A < 9; A++) // Frame length 9 + \u2554 = size 10
+            {
+                Console.WriteLine("   \u2551                     \u2551");
+            }
             Console.WriteLine("   \u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
+
+            
         }
+            
+           
+            
+
+
+        
+       }
 
         static void KeyReading()
         {
@@ -57,8 +54,6 @@ namespace GameCatch
             }
 
         }
-
-
 
 
 
