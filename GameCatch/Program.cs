@@ -15,17 +15,17 @@ namespace GameCatch
         static void showlayout()
         {
             Console.WriteLine("                          ");
-            Console.WriteLine("   # # # # # # # # # # # #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   #                     #");
-            Console.WriteLine("   # 1                   #");
-            Console.WriteLine("   # # # # # # # # # # # #");
+            Console.WriteLine("   \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551                     \u2551");
+            Console.WriteLine("   \u2551 1                   \u2551");
+            Console.WriteLine("   \u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
         }
 
         static void KeyReading()
@@ -36,17 +36,17 @@ namespace GameCatch
             {
                 Console.Clear(); // Erneuerung
                 Console.WriteLine("                          ");
-                Console.WriteLine("   # # # # # # # # # # # #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   # 1                   #");
-                Console.WriteLine("   #                     #");
-                Console.WriteLine("   # # # # # # # # # # # #");
+                Console.WriteLine("   \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u2551 1                   \u2551");
+                Console.WriteLine("   \u2551                     \u2551");
+                Console.WriteLine("   \u255A\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255D");
 
             }
 
