@@ -3,44 +3,48 @@
 namespace GameCatch
 {
     class Program
+
     {
+        const string BelowLeftCorner = "\u255A";
+        const string BelowRightCorner = "\u255D";
+        const string TopLeftCorner = "\u2554";
+        const string TopRightCorner = "\u2557";
+        const string HorizontalLine = "\u2550";
+        const string VerticalLine = "\u2551";
+
         static void Main(string[] args)
-        {
-            
+        {     
             var Size = 10; // Matchfield size
             Console.WriteLine("");
-            Console.Write("   \u2554");
+            Console.Write("   " + TopLeftCorner);
            
             for (int i = 0; i < (Size*2); i++)
             {                  
-                Console.Write("\u2550");
+                Console.Write(HorizontalLine);
             }
-            Console.WriteLine("\u2557");
 
-            
+            Console.WriteLine(TopRightCorner);
 
             for (int i = 0; i < Size; i++) 
             {
-                Console.Write("   \u2551");
-                // Console.WriteLine("   \u2551\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u2551");
+                Console.Write("   " + VerticalLine);
+                
                 for (int j = 0; j < (Size * 2); j++)
                 {
                     Console.Write(" ");
                 }
-                Console.WriteLine("\u2551");
+
+                Console.WriteLine(VerticalLine);
             }
 
+            Console.Write("   " + BelowLeftCorner);
 
-            Console.Write("   \u255A");
             for (int i = 0; i < (Size * 2); i++)
             {
-                Console.Write("\u2550");
+                Console.Write(HorizontalLine);
             }
-            Console.WriteLine("\u255D");
-           
-            
-            
-            
+
+            Console.WriteLine(BelowRightCorner);
         }
 
         
