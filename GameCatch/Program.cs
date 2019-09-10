@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameCatch
 {
     class Program
 
     {
+        List<string> frameLine = new List<string>();
         const string BelowLeftCorner = "\u255A";
         const string BelowRightCorner = "\u255D";
         const string TopLeftCorner = "\u2554";
@@ -26,7 +28,7 @@ namespace GameCatch
                 Console.ReadLine();
                 Console.Write(" Player 2:");
                 Console.ReadLine();
-                var Size = 10;                                          // Matchfield size
+                int Size = 10;                                          // Matchfield size
                 Console.WriteLine("");
                 Console.Write("   " + TopLeftCorner);
 
@@ -65,22 +67,21 @@ namespace GameCatch
                 System.Environment.Exit(0);
             }
 
-           
-           
             
-            
+
+
 
 
         }
 
-        
+
 
 
 
 
     }
 
-    
+   
 
 
 
