@@ -29,6 +29,25 @@ namespace GameCatch
                 Console.Write(" Player 2:");
                 Console.ReadLine();
                 int Size = 10;                                          // Matchfield size
+
+                string[,] playingfield = new string[Size, Size]; 
+
+                for (int i = 0; i < Size; i++)
+                {
+
+                    for (int j = 0; j < Size; j++)
+                     {
+                        playingfield[i, j] = "";
+                    } 
+                }
+
+                playingfield[5, 5] = "1";
+                playingfield[9, 9] = "2";
+
+
+
+
+
                 Console.WriteLine("");
                 Console.Write("   " + TopLeftCorner);
 
