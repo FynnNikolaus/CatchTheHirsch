@@ -6,7 +6,6 @@ namespace GameCatch
     class Program
 
     {
-        List<string> frameLine = new List<string>();
         const string BelowLeftCorner = "\u255A";
         const string BelowRightCorner = "\u255D";
         const string TopLeftCorner = "\u2554";
@@ -28,22 +27,10 @@ namespace GameCatch
                 Console.ReadLine();
                 Console.Write(" Player 2:");
                 Console.ReadLine();
-                int Size = 10;                                          // Matchfield size
+                int size = 10;                                          // Matchfield size
 
-                string[,] playingfield = new string[Size, Size]; 
 
-                for (int i = 0; i < Size; i++)
-                {
-
-                    for (int j = 0; j < Size; j++)
-                     {
-                        playingfield[i, j] = "";
-                    } 
-                }
-
-                playingfield[5, 5] = "1";
-                playingfield[9, 9] = "2";
-
+                var playingfield = CreatePlayingField(size);
 
 
 
@@ -51,18 +38,18 @@ namespace GameCatch
                 Console.WriteLine("");
                 Console.Write("   " + TopLeftCorner);
 
-                for (int i = 0; i < (Size * 2); i++)
+                for (int i = 0; i < (size * 2); i++)
                 {
                     Console.Write(HorizontalLine);
                 }
 
                 Console.WriteLine(TopRightCorner);
 
-                for (int i = 0; i < Size; i++)
+                for (int i = 0; i < size; i++)
                 {
                     Console.Write("   " + VerticalLine);
 
-                    for (int j = 0; j < (Size * 2); j++)
+                    for (int j = 0; j < (size * 2); j++)
                     {
                         Console.Write(" ");
                     }
@@ -72,7 +59,7 @@ namespace GameCatch
 
                 Console.Write("   " + BelowLeftCorner);
 
-                for (int i = 0; i < (Size * 2); i++)
+                for (int i = 0; i < (size * 2); i++)
                 {
                     Console.Write(HorizontalLine);
                 }
@@ -93,7 +80,24 @@ namespace GameCatch
 
         }
 
+        static string[,] CreatePlayingField(int size)
+        {
+            string[,] playingfield = new string[size, size];
 
+            for (int i = 0; i < size; i++)
+            {
+
+                for (int j = 0; j < size; j++)
+                {
+                    playingfield[i, j] = "";
+                }
+            }
+
+            playingfield[5, 5] = "1";
+            playingfield[9, 9] = "2";
+
+            return playingfield;
+        }
 
 
 
