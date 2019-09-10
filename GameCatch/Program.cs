@@ -29,55 +29,49 @@ namespace GameCatch
                 Console.ReadLine();
                 int size = 10;                                          // Matchfield size
 
-
                 var playingfield = CreatePlayingField(size);
+                DrawPlayingField(size, playingfield);
 
-
-
-
-                Console.WriteLine("");
-                Console.Write("   " + TopLeftCorner);
-
-                for (int i = 0; i < (size * 2); i++)
-                {
-                    Console.Write(HorizontalLine);
-                }
-
-                Console.WriteLine(TopRightCorner);
-
-                for (int i = 0; i < size; i++)
-                {
-                    Console.Write("   " + VerticalLine);
-
-                    for (int j = 0; j < (size * 2); j++)
-                    {
-                        Console.Write(" ");
-                    }
-
-                    Console.WriteLine(VerticalLine);
-                }
-
-                Console.Write("   " + BelowLeftCorner);
-
-                for (int i = 0; i < (size * 2); i++)
-                {
-                    Console.Write(HorizontalLine);
-                }
-
-                Console.WriteLine(BelowRightCorner);
             }
 
             if (MENU.Key == ConsoleKey.F2)
             {
-
                 System.Environment.Exit(0);
             }
+        }
 
-            
+        static void DrawPlayingField(int size, string[,] playingfield)
+        {
+            Console.WriteLine("");
+            Console.Write("   " + TopLeftCorner);
 
+            for (int i = 0; i < (size * 2); i++)
+            {
+                Console.Write(HorizontalLine);
+            }
 
+                     Console.WriteLine(TopRightCorner);
 
+            for (int zeile = 0; zeile < size; zeile++)
+            {
+                Console.Write("   " + VerticalLine);
 
+                for (int spalte = 0; spalte < (size * 2); spalte++)
+                {
+                    Console.Write(" ");
+                }
+
+                Console.WriteLine(VerticalLine);
+            }
+
+            Console.Write("   " + BelowLeftCorner);
+
+            for (int i = 0; i < (size * 2); i++)
+            {
+                Console.Write(HorizontalLine);
+            }
+
+            Console.WriteLine(BelowRightCorner);
         }
 
         static string[,] CreatePlayingField(int size)
