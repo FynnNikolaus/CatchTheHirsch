@@ -13,8 +13,13 @@ namespace GameCatch
         const string VerticalLine = "\u2551";
 
         static void Main(string[] args)
-        {     
-            var Size = 10; // Matchfield size
+        {
+            Console.WriteLine("");
+            Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
+            Console.WriteLine(" Press F1 to START or press F2 to CLOSE");
+            var MENU
+            while ()
+            var Size = 10;                                          // Matchfield size
             Console.WriteLine("");
             Console.Write("   " + TopLeftCorner);
            
@@ -45,6 +50,20 @@ namespace GameCatch
             }
 
             Console.WriteLine(BelowRightCorner);
+
+            //Player input 
+
+            Console.Write("   Player 1:");
+            Console.ReadLine();
+            Console.Write("   Player 2:");
+            Console.ReadLine();
+            
+            
+
+
+
+
+
         }
 
         
