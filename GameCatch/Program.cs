@@ -45,7 +45,7 @@ namespace GameCatch
             Console.WriteLine("");
             Console.Write("   " + TopLeftCorner);
 
-            for (int i = 0; i < (size * 2); i++)
+            for (int i = 0; i < (size); i++)
             {
                 Console.Write(HorizontalLine);
             }
@@ -56,9 +56,17 @@ namespace GameCatch
             {
                 Console.Write("   " + VerticalLine);
 
-                for (int spalte = 0; spalte < (size * 2); spalte++)
+                for (int spalte = 0; spalte < (size); spalte++)
                 {
-                    Console.Write(" ");
+                    var currentField = playingfield[zeile, spalte];
+                    if (currentField == "")
+                    {
+                        Console.Write(" ");
+                    }
+                    else
+                    {
+                        Console.Write(currentField);
+                    }
                 }
 
                 Console.WriteLine(VerticalLine);
@@ -66,7 +74,7 @@ namespace GameCatch
 
             Console.Write("   " + BelowLeftCorner);
 
-            for (int i = 0; i < (size * 2); i++)
+            for (int i = 0; i < (size); i++)
             {
                 Console.Write(HorizontalLine);
             }
