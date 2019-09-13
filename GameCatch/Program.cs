@@ -33,7 +33,8 @@ namespace GameCatch
 
                 var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                 DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
-
+                KeyPad(playingfield);
+                DrawPlayingField(size, playingfield);
             }
 
             if (MENU.Key == ConsoleKey.F2)
@@ -42,9 +43,10 @@ namespace GameCatch
             }
         }
 
-        static void DrawPlayingField(int size, string[,] playingfield) 
+        static void DrawPlayingField(int size, string[,] playingfield)
         {
-            Console.WriteLine(""); 
+            Console.Clear();
+            Console.WriteLine("");
             Console.Write("   " + TopLeftCorner); // Draws the left corner after 3 distances
 
             for (int i = 0; i < (size); i++)
@@ -52,7 +54,7 @@ namespace GameCatch
                 Console.Write(HorizontalLine); // Draws horizontal line on the field top 
             }
 
-                     Console.WriteLine(TopRightCorner); // Draws the right corner
+            Console.WriteLine(TopRightCorner); // Draws the right corner
 
             for (int zeile = 0; zeile < size; zeile++)
             {
@@ -100,10 +102,44 @@ namespace GameCatch
             playingfield[5, 5] = "1";
             playingfield[9, 8] = "2";
 
-            return playingfield; 
+            return playingfield;
         }
 
+        static string[,] KeyPad(string[,] playingfield, int size)
+        { 
+            var playerMove = Console.ReadKey();
+            var positionZeile = -1;
+            var positionSpalte = -1;
+for (int zeile = 0; zeile < size; zeile++)
+            {
+                for (int spalte =0; spalte < size; spalte++)
+                {
+                    if (playingfield[zeile, spalte] == "1")
+                    {
+                        
+                    }
+                }
+            }
+            if (playerMove.Key == ConsoleKey.UpArrow)
+            {
+               if (playingfield[5, 5] == "1")
+                {
+                    playingfield[5, 5] = "";
+                    playingfield[4, 5] = "1";
+                }
+            }
+            return playingfield;
 
+
+
+
+
+
+
+
+
+
+        }
 
 
     }
