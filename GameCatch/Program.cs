@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace GameCatch
 {
@@ -29,18 +30,23 @@ namespace GameCatch
                 Console.ReadLine(); //Keypad input 
                 Console.Write(" Player 2:");
                 Console.ReadLine();
-                int size = 10; // Matchfield size 
+                int size = 15; // Matchfield size 
 
-                var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
-                DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
                 while (true)
                 {
-                    KeyPad(playingfield, size);
-                    DrawPlayingField(size, playingfield);
+                    var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
+                    DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
+                    var moveValid = true;
+                    while (moveValid)
+                    {
+                        moveValid = KeyPad(playingfield, size);
+                        DrawPlayingField(size, playingfield);
+                    }
                 }
 
-               
-                
+
+
+
             }
 
             if (MENU.Key == ConsoleKey.F2)
@@ -111,7 +117,7 @@ namespace GameCatch
             return playingfield;
         }
 
-        static void KeyPad(string[,] playingfield, int size)
+        static bool KeyPad(string[,] playingfield, int size)
         {
             var playerMove = Console.ReadKey();
             var positionZeile = -1;
@@ -129,43 +135,61 @@ namespace GameCatch
             }
             if (playerMove.Key == ConsoleKey.UpArrow)
             {
-
+                if (positionZeile - 1 < 0)
+                {
+                    Console.WriteLine("   GAME OVER!");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
                 playingfield[positionZeile, positionSpalte] = "";
                 playingfield[positionZeile - 1, positionSpalte] = "1";
+
             }
             if (playerMove.Key == ConsoleKey.RightArrow)
             {
-
+                if (positionSpalte + 1 >= size)
+                {
+                    Console.WriteLine("   GAME OVER!");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
                 playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile, positionSpalte +1] = "1";
+                playingfield[positionZeile, positionSpalte + 1] = "1";
             }
             if (playerMove.Key == ConsoleKey.LeftArrow)
             {
-
+                if (positionSpalte - 1 < 0)
+                {
+                    Console.WriteLine("   GAME OVER!");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
                 playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile, positionSpalte -1] = "1";
+                playingfield[positionZeile, positionSpalte - 1] = "1";
             }
             if (playerMove.Key == ConsoleKey.DownArrow)
             {
-
+                if (positionZeile +1 >= size)
+                {
+                    Console.WriteLine("   GAME OVER!");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
                 playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile +1, positionSpalte ] = "1";
+                playingfield[positionZeile + 1, positionSpalte] = "1";
             }
 
-
-
-
-
-
-
-
-
+            return true;
         }
 
 
     }
 
-   
+
 
 
 
