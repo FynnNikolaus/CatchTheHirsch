@@ -33,8 +33,14 @@ namespace GameCatch
 
                 var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                 DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
-                KeyPad(playingfield);
-                DrawPlayingField(size, playingfield);
+                while (true)
+                {
+                    KeyPad(playingfield, size);
+                    DrawPlayingField(size, playingfield);
+                }
+
+               
+                
             }
 
             if (MENU.Key == ConsoleKey.F2)
@@ -105,31 +111,46 @@ namespace GameCatch
             return playingfield;
         }
 
-        static string[,] KeyPad(string[,] playingfield, int size)
-        { 
+        static void KeyPad(string[,] playingfield, int size)
+        {
             var playerMove = Console.ReadKey();
             var positionZeile = -1;
             var positionSpalte = -1;
-for (int zeile = 0; zeile < size; zeile++)
+            for (int zeile = 0; zeile < size; zeile++)
             {
-                for (int spalte =0; spalte < size; spalte++)
+                for (int spalte = 0; spalte < size; spalte++)
                 {
                     if (playingfield[zeile, spalte] == "1")
                     {
-                        
+                        positionZeile = zeile;
+                        positionSpalte = spalte;
                     }
                 }
             }
             if (playerMove.Key == ConsoleKey.UpArrow)
             {
-               if (playingfield[5, 5] == "1")
-                {
-                    playingfield[5, 5] = "";
-                    playingfield[4, 5] = "1";
-                }
-            }
-            return playingfield;
 
+                playingfield[positionZeile, positionSpalte] = "";
+                playingfield[positionZeile - 1, positionSpalte] = "1";
+            }
+            if (playerMove.Key == ConsoleKey.RightArrow)
+            {
+
+                playingfield[positionZeile, positionSpalte] = "";
+                playingfield[positionZeile, positionSpalte +1] = "1";
+            }
+            if (playerMove.Key == ConsoleKey.LeftArrow)
+            {
+
+                playingfield[positionZeile, positionSpalte] = "";
+                playingfield[positionZeile, positionSpalte -1] = "1";
+            }
+            if (playerMove.Key == ConsoleKey.DownArrow)
+            {
+
+                playingfield[positionZeile, positionSpalte] = "";
+                playingfield[positionZeile +1, positionSpalte ] = "1";
+            }
 
 
 
