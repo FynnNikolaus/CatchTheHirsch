@@ -121,8 +121,10 @@ namespace GameCatch
         {
 
             var playerMove = Console.ReadKey();
-            var positionZeile = -1;
-            var positionSpalte = -1;
+            var positionZeileEins = -1;
+            var positionSpalteEins = -1;
+            var positionZeileZwei = -1;
+            var positionSpalteZwei = -1;
             int SleepEnterPress = 600;
             for (int zeile = 0; zeile < size; zeile++)
             {
@@ -130,67 +132,128 @@ namespace GameCatch
                 {
                     if (playingfield[zeile, spalte] == "1")
                     {
-                        positionZeile = zeile;
-                        positionSpalte = spalte;
+                        positionZeileEins = zeile;
+                        positionSpalteEins = spalte;
+                    }
+                    if (playingfield[zeile, spalte] == "2")
+                    {
+                        positionZeileZwei = zeile;
+                        positionSpalteZwei = spalte;
                     }
                 }
             }
             if (playerMove.Key == ConsoleKey.UpArrow)
             {
-                if (positionZeile - 1 < 0)
+                if (positionZeileEins - 1 < 0)
                 {
-                    Console.WriteLine("   GAME OVER!");
+                    Console.WriteLine("   GAME OVER PLAYER1!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile - 1, positionSpalte] = "1";
+                playingfield[positionZeileEins, positionSpalteEins] = "";
+                playingfield[positionZeileEins - 1, positionSpalteEins] = "1";
 
+            }
+            if (playerMove.Key == ConsoleKey.W)  // UP
+            {
+                if (positionZeileZwei - 1 < 0)
+                {
+                    Console.WriteLine("   GAME OVER PLAYER2!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
+                playingfield[positionZeileZwei, positionSpalteZwei] = "";
+                playingfield[positionZeileZwei - 1, positionSpalteZwei] = "2";
             }
             if (playerMove.Key == ConsoleKey.RightArrow)
             {
-                if (positionSpalte + 1 >= size)
+                if (positionSpalteEins + 1 >= size)
                 {
-                    Console.WriteLine("   GAME OVER!");
+                    Console.WriteLine("   GAME OVER PLAYER1!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile, positionSpalte + 1] = "1";
+                playingfield[positionZeileEins, positionSpalteEins] = "";
+                playingfield[positionZeileEins, positionSpalteEins + 1] = "1";
+            }
+            if (playerMove.Key == ConsoleKey.D)  // Right
+            {
+                if (positionSpalteZwei + 1 >= size)
+                {
+                    Console.WriteLine("   GAME OVER PLAYER2!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
+                playingfield[positionZeileZwei, positionSpalteZwei] = "";
+                playingfield[positionZeileZwei, positionSpalteZwei + 1] = "2";
             }
             if (playerMove.Key == ConsoleKey.LeftArrow)
             {
-                if (positionSpalte - 1 < 0)
+                if (positionSpalteEins - 1 < 0)
                 {
-                    Console.WriteLine("   GAME OVER!");
+                    Console.WriteLine("   GAME OVER PLAYER1!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile, positionSpalte - 1] = "1";
+                playingfield[positionZeileEins, positionSpalteEins] = "";
+                playingfield[positionZeileEins, positionSpalteEins - 1] = "1";
+            }
+            if (playerMove.Key == ConsoleKey.A)  // Left
+            {
+                if (positionSpalteZwei - 1 < 0)
+                {
+                    Console.WriteLine("   GAME OVER PLAYER2!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
+                playingfield[positionZeileZwei, positionSpalteZwei] = "";
+                playingfield[positionZeileZwei, positionSpalteZwei - 1] = "2";
             }
             if (playerMove.Key == ConsoleKey.DownArrow)
             {
-                if (positionZeile +1 >= size)
+                if (positionZeileEins +1 >= size)
                 {
-                    Console.WriteLine("   GAME OVER!");
+                    Console.WriteLine("   GAME OVER PLAYER1!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                playingfield[positionZeile + 1, positionSpalte] = "1";
+                playingfield[positionZeileEins, positionSpalteEins] = "";
+                playingfield[positionZeileEins + 1, positionSpalteEins] = "1";
+            }
+            if (playerMove.Key == ConsoleKey.S)  // Down
+            {
+                if (positionZeileZwei +1 >= size)
+                {
+                    Console.WriteLine("   GAME OVER PLAYER2!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
+                    Console.ReadLine();
+                    Thread.Sleep(100);
+                    return false;
+                }
+                playingfield[positionZeileZwei, positionSpalteZwei] = "";
+                playingfield[positionZeileZwei + 1, positionSpalteZwei] = "2";
             }
 
             return true;
