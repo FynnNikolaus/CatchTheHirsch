@@ -30,7 +30,7 @@ namespace GameCatch
                 Console.ReadLine(); //Keypad input 
                 Console.Write(" Player 2:");
                 Console.ReadLine();
-                int size = 15; // Matchfield size 
+                int size = 11; // Matchfield size 
 
                 while (true)
                 {
@@ -119,9 +119,11 @@ namespace GameCatch
 
         static bool KeyPad(string[,] playingfield, int size)
         {
+
             var playerMove = Console.ReadKey();
             var positionZeile = -1;
             var positionSpalte = -1;
+            int SleepEnterPress = 600;
             for (int zeile = 0; zeile < size; zeile++)
             {
                 for (int spalte = 0; spalte < size; spalte++)
@@ -138,6 +140,8 @@ namespace GameCatch
                 if (positionZeile - 1 < 0)
                 {
                     Console.WriteLine("   GAME OVER!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
@@ -151,6 +155,8 @@ namespace GameCatch
                 if (positionSpalte + 1 >= size)
                 {
                     Console.WriteLine("   GAME OVER!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
@@ -163,6 +169,8 @@ namespace GameCatch
                 if (positionSpalte - 1 < 0)
                 {
                     Console.WriteLine("   GAME OVER!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
@@ -175,6 +183,8 @@ namespace GameCatch
                 if (positionZeile +1 >= size)
                 {
                     Console.WriteLine("   GAME OVER!");
+                    Thread.Sleep(SleepEnterPress);
+                    Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(100);
                     return false;
