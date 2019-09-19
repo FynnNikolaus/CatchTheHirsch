@@ -18,6 +18,8 @@ namespace GameCatch
         static void Main(string[] args)
         {
             // Create a MANU for the game
+            Console.WriteLine(" (c) 2019 Fynn Nikolaus. All rights reserved.");
+            Thread.Sleep(2500);
             Console.WriteLine("");
             Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
             Console.WriteLine(" Press F1 to START or press F2 to CLOSE");
@@ -131,6 +133,7 @@ namespace GameCatch
             var positionZeileEins = -1;
             var positionSpalteEins = -1;
             int SleepEnterPress = 600;
+            int finalDeleay = 10;
             for (int zeile = 0; zeile < size; zeile++)
             {
                 for (int spalte = 0; spalte < size; spalte++)
@@ -150,7 +153,7 @@ namespace GameCatch
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
-                    Thread.Sleep(100);
+                    Thread.Sleep(finalDeleay);
                     return false;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
@@ -165,7 +168,7 @@ namespace GameCatch
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
-                    Thread.Sleep(100);
+                    Thread.Sleep(finalDeleay);
                     return false;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
@@ -179,7 +182,7 @@ namespace GameCatch
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
-                    Thread.Sleep(100);
+                    Thread.Sleep(finalDeleay);
                     return false;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
@@ -193,7 +196,7 @@ namespace GameCatch
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
-                    Thread.Sleep(100);
+                    Thread.Sleep(finalDeleay);
                     return false;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
