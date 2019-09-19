@@ -37,16 +37,19 @@ namespace GameCatch
                     var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
                     var moveValidEins = true;
-                    var moveValidZwei = true;
+                    var moveValidZwei = false;
                     while (moveValidEins)
                     {
                         moveValidEins = KeyPadPlayer1(playingfield, size);
                         DrawPlayingField(size, playingfield);
-                    }
-                    while (moveValidZwei)
-                    {
-                        moveValidZwei = KeyPadPlayer2(playingfield, size);
-                        DrawPlayingField(size, playingfield);
+                        moveValidZwei = true;
+                        while (moveValidZwei)
+                        {
+                            moveValidZwei = KeyPadPlayer2(playingfield, size);
+                            DrawPlayingField(size, playingfield);
+                            break;
+                        }
+
                     }
                 }
             }
