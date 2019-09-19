@@ -29,15 +29,16 @@ namespace GameCatch
                 Console.WriteLine("");
                 Console.WriteLine(" Please enter your nickname: ");
                 Console.Write(" Player 1:");
-                Console.ReadLine(); //Keypad input 
+                string playerNameOne = Console.ReadLine();
                 Console.Write(" Player 2:");
-                Console.ReadLine();
+                string playerNameTwo = Console.ReadLine();
                 int size = 11; // Matchfield size 
 
                 while (true)
                 {
                     var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
+                    Console.WriteLine("   " + playerNameOne + " You're starting!");
                     var moveValid = true;
                     int player = 1;
                     while (moveValid)
@@ -46,10 +47,12 @@ namespace GameCatch
                         DrawPlayingField(size, playingfield);
                         if (player == 1)
                         {
+                            Console.WriteLine("   " +playerNameTwo + ", you move!");
                             player = 2;
                         }
-                        else 
+                        else
                         {
+                            Console.WriteLine("   " + playerNameOne + ", you move!");
                             player = 1;
                         }
 
@@ -206,7 +209,7 @@ namespace GameCatch
         }
 
 
-
+        
 
 
     }
