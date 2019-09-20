@@ -17,7 +17,6 @@ namespace GameCatch
 
         static void Main(string[] args)
         {
-            // Create a MANU for the game
             Console.WriteLine(" (c) 2019 Fynn Nikolaus. All rights reserved.");
             Thread.Sleep(2500);
             Console.WriteLine("");
@@ -38,7 +37,7 @@ namespace GameCatch
                 {
                     var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
-                    Console.WriteLine("   " + playerNameOne + " You're starting!");
+                    Console.WriteLine("    " + playerNameOne + " You're starting!");
                     var moveValid = true;
                     int player = 1;
                     while (moveValid)
@@ -47,12 +46,12 @@ namespace GameCatch
                         DrawPlayingField(size, playingfield);
                         if (player == 1)
                         {
-                            Console.WriteLine("   " +playerNameTwo + ", you move!");
+                            Console.WriteLine("    " + playerNameTwo + ", you move!");
                             player = 2;
                         }
                         else
                         {
-                            Console.WriteLine("   " + playerNameOne + ", you move!");
+                            Console.WriteLine("    " + playerNameOne + ", you move!");
                             player = 1;
                         }
 
@@ -70,6 +69,7 @@ namespace GameCatch
         static void DrawPlayingField(int size, string[,] playingfield)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("");
             Console.Write("   " + TopLeftCorner); // Draws the left corner after 3 distances
 
@@ -93,7 +93,7 @@ namespace GameCatch
                     }
                     else
                     {
-                        Console.Write(currentField); // Set characters from "Zeile" and "Spalte" 
+                        Console.Write(currentField); // Set characters from "Zeile" and "Spalte
                     }
                 }
 
@@ -208,8 +208,8 @@ namespace GameCatch
             return true;
         }
 
-
         
+
 
 
     }
