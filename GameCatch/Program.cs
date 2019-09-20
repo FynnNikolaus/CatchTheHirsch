@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading;
+
+
 
 namespace GameCatch
 {
@@ -17,7 +20,8 @@ namespace GameCatch
 
         static void Main(string[] args)
         {
-            Console.WriteLine(" (c) 2019 Fynn Nikolaus. All rights reserved.");
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved \u047E \u0466 .");
             Thread.Sleep(2500);
             Console.WriteLine("");
             Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
@@ -93,7 +97,16 @@ namespace GameCatch
                     }
                     else
                     {
+                        if (currentField == "1")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        if (currentField == "2")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                        }
                         Console.Write(currentField); // Set characters from "Zeile" and "Spalte
+                        Console.ForegroundColor = ConsoleColor.Magenta;
                     }
                 }
 
