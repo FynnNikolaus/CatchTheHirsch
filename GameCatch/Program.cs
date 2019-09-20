@@ -17,11 +17,13 @@ namespace GameCatch
         const string TopRightCorner = "\u2557";
         const string HorizontalLine = "\u2550";
         const string VerticalLine = "\u2551";
+        const string hunter = "\u0466";
+        const string hirsch = "\u047E";
 
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved \u047E \u0466 .");
+            Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
             Thread.Sleep(2500);
             Console.WriteLine("");
             Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
@@ -43,20 +45,20 @@ namespace GameCatch
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
                     var moveValid = true;
-                    int player = 1;
+                    string player = hunter;
                     while (moveValid)
                     {
                         moveValid = KeyPadPlayer(playingfield, size, player);
                         DrawPlayingField(size, playingfield);
-                        if (player == 1)
+                        if (player == hunter)
                         {
                             Console.WriteLine("    " + playerNameTwo + ", you move!");
-                            player = 2;
+                            player = hirsch;
                         }
                         else
                         {
                             Console.WriteLine("    " + playerNameOne + ", you move!");
-                            player = 1;
+                            player = hunter;
                         }
 
                     }
@@ -97,11 +99,11 @@ namespace GameCatch
                     }
                     else
                     {
-                        if (currentField == "1")
+                        if (currentField == hunter)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
                         }
-                        if (currentField == "2")
+                        if (currentField == hirsch)
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
                         }
@@ -136,19 +138,19 @@ namespace GameCatch
                 }
             }
             // set player in the array 
-            playingfield[5, 5] = "1";
-            playingfield[9, 8] = "2";
+            playingfield[5, 5] = hunter;
+            playingfield[9, 8] = hirsch;
 
             return playingfield;
         }
 
-        static bool KeyPadPlayer(string[,] playingfield, int size, int player)
+        static bool KeyPadPlayer(string[,] playingfield, int size, string player)
         {
 
             var playerMove = Console.ReadKey();
             var positionZeileEins = -1;
             var positionSpalteEins = -1;
-            int SleepEnterPress = 600;
+            int SleepEnterPress = 1700;
             int finalDeleay = 10;
             for (int zeile = 0; zeile < size; zeile++)
             {
@@ -165,7 +167,7 @@ namespace GameCatch
             {
                 if (positionZeileEins - 1 < 0)
                 {
-                    Console.WriteLine("   GAME OVER PLAYER " + player.ToString() + "!");
+                    Console.WriteLine("   GAME OVER  " + player.ToString() + "!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
@@ -180,7 +182,7 @@ namespace GameCatch
             {
                 if (positionSpalteEins + 1 >= size)
                 {
-                    Console.WriteLine("   GAME OVER PLAYER " + player.ToString() + "!");
+                    Console.WriteLine("   GAME OVER " + player.ToString() + "!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
@@ -194,7 +196,7 @@ namespace GameCatch
             {
                 if (positionSpalteEins - 1 < 0)
                 {
-                    Console.WriteLine("   GAME OVER PLAYER " + player.ToString() + "!");
+                    Console.WriteLine("   GAME OVER " + player.ToString() + "!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
@@ -208,7 +210,7 @@ namespace GameCatch
             {
                 if (positionZeileEins + 1 >= size)
                 {
-                    Console.WriteLine("   GAME OVER PLAYER " + player.ToString() + "!");
+                    Console.WriteLine("   GAME OVER " + player.ToString() + "");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
