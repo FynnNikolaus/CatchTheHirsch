@@ -150,7 +150,7 @@ namespace GameCatch
             var playerMove = Console.ReadKey();
             var positionZeileEins = -1;
             var positionSpalteEins = -1;
-            int SleepEnterPress = 1700;
+            int SleepEnterPress = 1000;
             int finalDeleay = 10;
             for (int zeile = 0; zeile < size; zeile++)
             {
@@ -222,11 +222,6 @@ namespace GameCatch
             }
             return true;
         }
-
-        
-
-
-
     }
 
 
