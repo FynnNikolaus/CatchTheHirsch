@@ -19,6 +19,7 @@ namespace GameCatch
         const string VerticalLine = "\u2551";
         const string hunter = "\u0466";
         const string hirsch = "\u047E";
+        enum KeyResult { GameOver, NextPlayer, Invalid };
 
         static void Main(string[] args)
         {
@@ -44,9 +45,9 @@ namespace GameCatch
                     var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
-                    var moveValid = true;
+                    KeyResult moveValid = KeyResult.NextPlayer;
                     string player = hunter;
-                    while (moveValid)
+                    while (KeyResult.NextPlayer) //enum 3 option 
                     {
                         moveValid = KeyPadPlayer(playingfield, size, player);
                         DrawPlayingField(size, playingfield);
@@ -144,9 +145,8 @@ namespace GameCatch
             return playingfield;
         }
 
-        static bool KeyPadPlayer(string[,] playingfield, int size, string player)
+        static KeyResult KeyPadPlayer(string[,] playingfield, int size, string player)
         {
-
             var playerMove = Console.ReadKey();
             var positionZeileEins = -1;
             var positionSpalteEins = -1;
@@ -172,13 +172,13 @@ namespace GameCatch
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(finalDeleay);
-                    return false;
+                    return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
                 playingfield[positionZeileEins - 1, positionSpalteEins] = player.ToString();
 
             }
-            if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
+            else if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
             {
                 if (positionSpalteEins + 1 >= size)
                 {
@@ -187,12 +187,12 @@ namespace GameCatch
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(finalDeleay);
-                    return false;
+                    return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
                 playingfield[positionZeileEins, positionSpalteEins + 1] = player.ToString();
             }
-            if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
+            else if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
             {
                 if (positionSpalteEins - 1 < 0)
                 {
@@ -201,12 +201,12 @@ namespace GameCatch
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(finalDeleay);
-                    return false;
+                    return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
                 playingfield[positionZeileEins, positionSpalteEins - 1] = player.ToString();
             }
-            if (playerMove.Key == ConsoleKey.DownArrow || playerMove.Key == ConsoleKey.S)
+            else if (playerMove.Key == ConsoleKey.DownArrow || playerMove.Key == ConsoleKey.S)
             {
                 if (positionZeileEins + 1 >= size)
                 {
@@ -215,12 +215,21 @@ namespace GameCatch
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
                     Thread.Sleep(finalDeleay);
-                    return false;
+                    return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
                 playingfield[positionZeileEins + 1, positionSpalteEins] = player.ToString();
             }
-            return true;
+            else
+            {
+                return KeyResult.Invalid;
+            }
+
+            return KeyResult.NextPlayer;
+
+
+
+
         }
     }
 
