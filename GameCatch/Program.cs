@@ -44,12 +44,10 @@ namespace GameCatch
                 {
                     var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
-                    Console.WriteLine("    " + playerNameOne + " You're starting!");
-                    KeyResult moveValid = KeyResult.NextPlayer;
+                    Console.WriteLine("    " + playerNameOne + " You're starting!");      
                     string player = hunter;
-                    while (KeyResult.NextPlayer) //enum 3 option 
-                    {
-                        moveValid = KeyPadPlayer(playingfield, size, player);
+                    while (KeyPadPlayer(playingfield, size, player) == KeyResult.NextPlayer) //enum 3 option 
+                    {                 
                         DrawPlayingField(size, playingfield);
                         if (player == hunter)
                         {
@@ -61,7 +59,6 @@ namespace GameCatch
                             Console.WriteLine("    " + playerNameOne + ", you move!");
                             player = hunter;
                         }
-
                     }
                 }
             }
@@ -210,7 +207,7 @@ namespace GameCatch
             {
                 if (positionZeileEins + 1 >= size)
                 {
-                    Console.WriteLine("   GAME OVER " + player.ToString() + "");
+                    Console.WriteLine("   GAME OVER " + player.ToString() + "!");
                     Thread.Sleep(SleepEnterPress);
                     Console.WriteLine("    Press [ENTER]");
                     Console.ReadLine();
@@ -220,10 +217,7 @@ namespace GameCatch
                 playingfield[positionZeileEins, positionSpalteEins] = "";
                 playingfield[positionZeileEins + 1, positionSpalteEins] = player.ToString();
             }
-            else
-            {
-                return KeyResult.Invalid;
-            }
+            
 
             return KeyResult.NextPlayer;
 
