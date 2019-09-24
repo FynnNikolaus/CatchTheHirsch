@@ -20,6 +20,7 @@ namespace GameCatch
         const string hunter = "\u0466";
         const string hirsch = "\u047E";
         enum KeyResult { GameOver, NextPlayer, Invalid };
+        enum ShowPlayer { PlayerOne, PlayerTwo };
 
         static void Main(string[] args)
         {
@@ -46,13 +47,14 @@ namespace GameCatch
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
                     string player = hunter;
-                    while (KeyPadPlayer(playingfield, size, player) == KeyResult.NextPlayer) //enum 3 option 
+                    while (KeyPadPlayer(playingfield, size, player) == KeyResult.NextPlayer) 
                     {
                         DrawPlayingField(size, playingfield);
                         if (player == hunter)
                         {
                             Console.WriteLine("    " + playerNameTwo + ", you move!");
                             player = hirsch;
+
                         }
                         else
                         {
@@ -64,7 +66,7 @@ namespace GameCatch
                     {
                         GameOverFunction(player);
                     }
-                    if (KeyPadPlayer(playingfield, size, player) == KeyResult.Invalid) // springt ganz zurück
+                    if (KeyPadPlayer(playingfield, size, player) == KeyResult.Invalid) // springt ganz zurück FAIL
                     {
                         // Methode wenn valid
                     }
@@ -227,13 +229,34 @@ namespace GameCatch
             Thread.Sleep(finalDeleay);
         }
 
+        static ShowPlayer PlayerSwitch(string player, string playerNameOne, string playerNameTwo, string[,] playingfield, int size) 
+        {
+            while (true)
+            {
+                if (KeyPadPlayer(playingfield, size, player) == KeyResult.GameOver)
+                {
+                    if (player == playerNameOne)
+                    {
+                        playerNameOne = playerNameTwo;
+                    }
+                    if (player == playerNameTwo)
+                    {
+                        playerNameTwo = playerNameOne;
+                    }
+
+                }
+
+            }
+            
+        }
+        
 
     }
 
 }
 
 
-
+//enum ShowPlayer { PlayerOne, PlayerTwo };
 
 
 
