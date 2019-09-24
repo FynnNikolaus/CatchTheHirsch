@@ -44,10 +44,10 @@ namespace GameCatch
                 {
                     var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
-                    Console.WriteLine("    " + playerNameOne + " You're starting!");      
+                    Console.WriteLine("    " + playerNameOne + " You're starting!");
                     string player = hunter;
                     while (KeyPadPlayer(playingfield, size, player) == KeyResult.NextPlayer) //enum 3 option 
-                    {                 
+                    {
                         DrawPlayingField(size, playingfield);
                         if (player == hunter)
                         {
@@ -62,17 +62,14 @@ namespace GameCatch
                     }
                     if (KeyPadPlayer(playingfield, size, player) == KeyResult.GameOver)
                     {
-                        int SleepEnterPress = 1000;
-                        int finalDeleay = 10;
-                        Console.WriteLine("   GAME OVER " + player.ToString() + "!");
-                        Thread.Sleep(SleepEnterPress);
-                        Console.WriteLine("    Press [ENTER]");
-                        Console.ReadLine();
-                        Thread.Sleep(finalDeleay);
+                        GameOverFunction(player);
+                    }
+                    if (KeyPadPlayer(playingfield, size, player) == KeyResult.Invalid) // springt ganz zurück
+                    {
+                        // Methode wenn valid
                     }
                 }
             }
-
 
             if (MENU.Key == ConsoleKey.F2)
             {
@@ -171,7 +168,7 @@ namespace GameCatch
             if (playerMove.Key == ConsoleKey.UpArrow || playerMove.Key == ConsoleKey.W)
             {
                 if (positionZeileEins - 1 < 0)
-                {   
+                {
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
@@ -181,7 +178,7 @@ namespace GameCatch
             else if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
             {
                 if (positionSpalteEins + 1 >= size)
-                {    
+                {
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
@@ -190,7 +187,7 @@ namespace GameCatch
             else if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
             {
                 if (positionSpalteEins - 1 < 0)
-                {         
+                {
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
@@ -205,23 +202,43 @@ namespace GameCatch
                 playingfield[positionZeileEins, positionSpalteEins] = "";
                 playingfield[positionZeileEins + 1, positionSpalteEins] = player.ToString();
             }
-            
+            else
+            {
+                return KeyResult.Invalid;
+            }
+
 
             return KeyResult.NextPlayer;
 
+            
 
 
 
         }
+
+        static void GameOverFunction(string player)
+        {
+            int SleepEnterPress = 1000;
+            int finalDeleay = 10;
+            Console.WriteLine("   GAME OVER " + player.ToString() + "!");
+            Thread.Sleep(SleepEnterPress);
+            Console.WriteLine("    Press [ENTER]");
+            Console.ReadLine();
+            Thread.Sleep(finalDeleay);
+        }
+
+
     }
 
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
 
