@@ -20,7 +20,6 @@ namespace GameCatch
         const string hunter = "\u0466";
         const string hirsch = "\u047E";
         enum KeyResult { GameOver, NextPlayer, Invalid };
-        enum ShowPlayer { PlayerOne, PlayerTwo };
 
         static void Main(string[] args)
         {
@@ -47,26 +46,29 @@ namespace GameCatch
                     DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
                     string player = hunter;
-                    while (KeyPadPlayer(playingfield, size, player) == KeyResult.NextPlayer) 
+                    var moveResult = KeyPadPlayer(playingfield, size, player);
+
+                    while (moveResult == KeyResult.NextPlayer)
                     {
                         DrawPlayingField(size, playingfield);
                         if (player == hunter)
                         {
                             Console.WriteLine("    " + playerNameTwo + ", you move!");
                             player = hirsch;
-
                         }
                         else
                         {
                             Console.WriteLine("    " + playerNameOne + ", you move!");
                             player = hunter;
                         }
+                        moveResult = KeyPadPlayer(playingfield, size, player);
                     }
-                    if (KeyPadPlayer(playingfield, size, player) == KeyResult.GameOver)
+                    if (moveResult == KeyResult.GameOver)
                     {
                         GameOverFunction(player);
+                        PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
-                    if (KeyPadPlayer(playingfield, size, player) == KeyResult.Invalid) // springt ganz zurück FAIL
+                    if (moveResult == KeyResult.Invalid) // springt ganz zurück FAIL
                     {
                         // Methode wenn valid
                     }
@@ -212,7 +214,7 @@ namespace GameCatch
 
             return KeyResult.NextPlayer;
 
-            
+
 
 
 
@@ -229,34 +231,20 @@ namespace GameCatch
             Thread.Sleep(finalDeleay);
         }
 
-        static ShowPlayer PlayerSwitch(string player, string playerNameOne, string playerNameTwo, string[,] playingfield, int size) 
+        static void PlayerSwitch(ref string playerNameOne, ref string playerNameTwo)
         {
-            while (true)
-            {
-                if (KeyPadPlayer(playingfield, size, player) == KeyResult.GameOver)
-                {
-                    if (player == playerNameOne)
-                    {
-                        playerNameOne = playerNameTwo;
-                    }
-                    if (player == playerNameTwo)
-                    {
-                        playerNameTwo = playerNameOne;
-                    }
-
-                }
-
-            }
-            
+            var p = playerNameOne;
+            playerNameOne = playerNameTwo;
+            playerNameTwo = p;
         }
-        
+
 
     }
 
 }
 
 
-//enum ShowPlayer { PlayerOne, PlayerTwo };
+
 
 
 
