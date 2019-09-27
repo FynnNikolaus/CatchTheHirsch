@@ -223,12 +223,19 @@ namespace GameCatch
         static void GameOverFunction(string player)
         {
             int SleepEnterPress = 1000;
-            int finalDeleay = 10;
             Console.WriteLine("   GAME OVER " + player.ToString() + "!");
             Thread.Sleep(SleepEnterPress);
             Console.WriteLine("    Press [ENTER]");
-            Console.ReadLine();
-            Thread.Sleep(finalDeleay);
+            var value = true;
+
+            while (value)
+            {
+                var further = Console.ReadKey();
+                if (further.Key == ConsoleKey.Enter)
+                {
+                    value = false;
+                }
+            }
         }
 
         static void PlayerSwitch(ref string playerNameOne, ref string playerNameTwo)
