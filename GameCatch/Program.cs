@@ -226,15 +226,10 @@ namespace GameCatch
             Console.WriteLine("   GAME OVER " + player.ToString() + "!");
             Thread.Sleep(SleepEnterPress);
             Console.WriteLine("    Press [ENTER]");
-            var value = true;
-
-            while (value)
+            var further = Console.ReadKey();
+            while (further.Key != ConsoleKey.Enter)
             {
-                var further = Console.ReadKey();
-                if (further.Key == ConsoleKey.Enter)
-                {
-                    value = false;
-                }
+                further = Console.ReadKey();
             }
         }
 
