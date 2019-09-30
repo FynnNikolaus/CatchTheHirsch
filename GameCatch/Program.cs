@@ -24,6 +24,7 @@ namespace GameCatch
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
             Thread.Sleep(2500);
             Console.WriteLine("");
@@ -228,12 +229,23 @@ namespace GameCatch
             Console.WriteLine("    Press [ENTER]");
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
+
         static void PlayerSwitch(ref string playerNameOne, ref string playerNameTwo)
         {
             var p = playerNameOne;
             playerNameOne = playerNameTwo;
             playerNameTwo = p;
         }    
+
+        static void ShowPlayerColor(string player, string playerNameOne, string playerNameTwo)
+        {
+          //if (player == )  
+        } //eigentlich nur player Name One Farbe und player Name two Farbe 
+
+        static void CatchFunction()
+        {
+            // if arrey abfrage 
+        }
     }
 
 }
