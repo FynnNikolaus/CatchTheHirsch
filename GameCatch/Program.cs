@@ -10,7 +10,6 @@ namespace GameCatch
     class Program
 
     {
-        // Variable for the match field withe unit codes 
         const string BelowLeftCorner = "\u255A";
         const string BelowRightCorner = "\u255D";
         const string TopLeftCorner = "\u2554";
@@ -30,7 +29,7 @@ namespace GameCatch
             Console.WriteLine("");
             Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
             Console.WriteLine(" Press F1 to START or press F2 to CLOSE");
-            var MENU = Console.ReadKey(); // Read the keypad for menu options
+            var MENU = Console.ReadKey(); 
             if (MENU.Key == ConsoleKey.F1)
             {
                 Console.WriteLine("");
@@ -39,12 +38,12 @@ namespace GameCatch
                 string playerNameOne = Console.ReadLine();
                 Console.Write(" Player 2:");
                 string playerNameTwo = Console.ReadLine();
-                int size = 11; // Matchfield size 
+                int size = 11; 
 
                 while (true)
                 {
-                    var playingfield = CreatePlayingField(size); // Implementable the parameter size in CreatePlayingField method 
-                    DrawPlayingField(size, playingfield); // Implementable the parameter size and the string from CreatePlayingField
+                    var playingfield = CreatePlayingField(size); 
+                    DrawPlayingField(size, playingfield); 
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
                     string player = hunter;
                     var moveResult = KeyPadPlayer(playingfield, size, player);
@@ -69,16 +68,16 @@ namespace GameCatch
                         GameOverFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
-                    if (moveResult == KeyResult.Invalid) // springt ganz zurück FAIL
+                    if (moveResult == KeyResult.Invalid) 
                     {
-                        // Methode wenn valid
+                        
                     }
                 }
             }
 
             if (MENU.Key == ConsoleKey.F2)
             {
-                System.Environment.Exit(0); //Close the terminal
+                System.Environment.Exit(0); 
             }
         }
 
@@ -87,25 +86,25 @@ namespace GameCatch
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("");
-            Console.Write("   " + TopLeftCorner); // Draws the left corner after 3 distances
+            Console.Write("   " + TopLeftCorner); 
 
             for (int i = 0; i < (size); i++)
             {
-                Console.Write(HorizontalLine); // Draws horizontal line on the field top 
+                Console.Write(HorizontalLine); 
             }
 
-            Console.WriteLine(TopRightCorner); // Draws the right corner
+            Console.WriteLine(TopRightCorner); 
 
             for (int zeile = 0; zeile < size; zeile++)
             {
-                Console.Write("   " + VerticalLine); // Draws the left field line
+                Console.Write("   " + VerticalLine); 
 
                 for (int spalte = 0; spalte < (size); spalte++)
                 {
                     var currentField = playingfield[zeile, spalte];
                     if (currentField == "")
                     {
-                        Console.Write(" "); //Makes in a void string a space
+                        Console.Write(" "); 
                     }
                     else
                     {
@@ -117,14 +116,14 @@ namespace GameCatch
                         {
                             Console.ForegroundColor = ConsoleColor.Yellow;
                         }
-                        Console.Write(currentField); // Set characters from "Zeile" and "Spalte
+                        Console.Write(currentField); 
                         Console.ForegroundColor = ConsoleColor.Magenta;
                     }
                 }
 
-                Console.WriteLine(VerticalLine); // Draws the right line
+                Console.WriteLine(VerticalLine); 
             }
-            // Draws the below left corner aand the below right corner and the below line
+            
             Console.Write("   " + BelowLeftCorner);
 
             for (int i = 0; i < (size); i++)
@@ -137,14 +136,14 @@ namespace GameCatch
 
         static string[,] CreatePlayingField(int size)
         {
-            string[,] playingfield = new string[size, size]; //Create a 2 demension string for "Spalte" and "Zeile"
+            string[,] playingfield = new string[size, size]; 
 
             for (int i = 0; i < size; i++)
             {
 
                 for (int j = 0; j < size; j++)
                 {
-                    playingfield[i, j] = ""; // overwrite null in "" 
+                    playingfield[i, j] = ""; 
                 }
             }
             // set player in the array 
@@ -240,7 +239,7 @@ namespace GameCatch
         static void ShowPlayerColor(string player, string playerNameOne, string playerNameTwo)
         {
           //if (player == )  
-        } //eigentlich nur player Name One Farbe und player Name two Farbe 
+        } 
 
         static void CatchFunction()
         {
