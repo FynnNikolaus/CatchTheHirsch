@@ -18,6 +18,8 @@ namespace GameCatch
         const string VerticalLine = "\u2551";
         const string hunter = "\u0466";
         const string hirsch = "\u047E";
+        const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
+        const ConsoleColor PlayerColorRed = ConsoleColor.Red;
         enum KeyResult { GameOver, NextPlayer, Invalid };
 
         static void Main(string[] args)
@@ -53,11 +55,13 @@ namespace GameCatch
                         DrawPlayingField(size, playingfield);
                         if (player == hunter)
                         {
+                            Console.ForegroundColor = PlayerColorYello;
                             Console.WriteLine("    " + playerNameTwo + ", you move!");
                             player = hirsch;
                         }
                         else
                         {
+                            Console.ForegroundColor = PlayerColorRed;
                             Console.WriteLine("    " + playerNameOne + ", you move!");
                             player = hunter;
                         }
@@ -213,11 +217,6 @@ namespace GameCatch
 
 
             return KeyResult.NextPlayer;
-
-
-
-
-
         }
 
         static void GameOverFunction(string player)
@@ -235,11 +234,6 @@ namespace GameCatch
             playerNameOne = playerNameTwo;
             playerNameTwo = p;
         }    
-
-        static void ShowPlayerColor(string player, string playerNameOne, string playerNameTwo)
-        {
-          //if (player == )  
-        } 
 
         static void CatchFunction()
         {
