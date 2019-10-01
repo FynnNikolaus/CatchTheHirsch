@@ -1,2 +1,2 @@
 # CatchTheHirsch
-My new visual studio project 
+My first visual studio project 
