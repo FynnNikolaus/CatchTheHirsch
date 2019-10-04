@@ -180,8 +180,8 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
+                CatchFunction(playingfield, positionZeileEins - 1, positionSpalteEins, player, size);
                 playingfield[positionZeileEins - 1, positionSpalteEins] = player.ToString();
-
             }
             else if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
             {
@@ -190,6 +190,7 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
+                CatchFunction(playingfield, positionZeileEins, positionSpalteEins + 1, player, size);
                 playingfield[positionZeileEins, positionSpalteEins + 1] = player.ToString();
             }
             else if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
@@ -199,6 +200,7 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
+                CatchFunction(playingfield, positionZeileEins, positionSpalteEins -1, player, size);
                 playingfield[positionZeileEins, positionSpalteEins - 1] = player.ToString();
             }
             else if (playerMove.Key == ConsoleKey.DownArrow || playerMove.Key == ConsoleKey.S)
@@ -208,6 +210,7 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
+                CatchFunction(playingfield, positionZeileEins + 1, positionSpalteEins, player, size);
                 playingfield[positionZeileEins + 1, positionSpalteEins] = player.ToString();
             }
             else
@@ -224,7 +227,7 @@ namespace GameCatch
             int SleepEnterPress = 1000;
             Console.WriteLine("   GAME OVER " + player.ToString() + "!");
             Thread.Sleep(SleepEnterPress);
-            Console.WriteLine("    Press [ENTER]");
+            Console.WriteLine("   Press [ENTER]");
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
 
@@ -235,9 +238,23 @@ namespace GameCatch
             playerNameTwo = p;
         }    
 
-        static void CatchFunction()
+        static void CatchFunction(string[,] playingfield, int positionZeileEins, int positionSpalteEins, string player, int size)
         {
-            // if arrey abfrage 
+            if (player == hunter && playingfield [positionZeileEins, positionSpalteEins] == hirsch)
+            {
+                DrawPlayingField(size, playingfield);
+                WinnFunction(player); // später eine winner Methode erstellen!!
+            }
+        }
+
+        static void WinnFunction(string player)
+        {
+            int SleepEnterPress = 1000;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("   WINN " + player.ToString() + " !!!");
+            Thread.Sleep(SleepEnterPress);
+            Console.WriteLine("   Press [ENTER]");
+            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
     }
 
