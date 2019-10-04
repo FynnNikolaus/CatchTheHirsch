@@ -20,7 +20,7 @@ namespace GameCatch
         const string hirsch = "\u047E";
         const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
-        enum KeyResult { GameOver, NextPlayer, Invalid };
+        enum KeyResult { GameOver, NextPlayer, Invalid, Winn };
 
         static void Main(string[] args)
         {
@@ -49,6 +49,7 @@ namespace GameCatch
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
                     string player = hunter;
                     var moveResult = KeyPadPlayer(playingfield, size, player);
+                   
 
                     while (moveResult == KeyResult.NextPlayer)
                     {
@@ -70,6 +71,12 @@ namespace GameCatch
                     if (moveResult == KeyResult.GameOver)
                     {
                         GameOverFunction(player);
+                        PlayerSwitch(ref playerNameOne, ref playerNameTwo);
+                    }
+                    if (moveResult == KeyResult.Winn)
+                    {
+                        DrawPlayingField(size, playingfield);
+                        WinnFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                     if (moveResult == KeyResult.Invalid) 
@@ -180,8 +187,12 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
-                CatchFunction(playingfield, positionZeileEins - 1, positionSpalteEins, player, size);
+                var isCatched = IsHirschCatched(playingfield, positionZeileEins - 1, positionSpalteEins, player);                    
+
                 playingfield[positionZeileEins - 1, positionSpalteEins] = player.ToString();
+
+                if (isCatched)
+                    return KeyResult.Winn;
             }
             else if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
             {
@@ -190,8 +201,12 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
-                CatchFunction(playingfield, positionZeileEins, positionSpalteEins + 1, player, size);
+                var isCatched = IsHirschCatched(playingfield, positionZeileEins, positionSpalteEins + 1, player);
+               
                 playingfield[positionZeileEins, positionSpalteEins + 1] = player.ToString();
+
+                if (isCatched)
+                    return KeyResult.Winn;
             }
             else if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
             {
@@ -200,8 +215,12 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
-                CatchFunction(playingfield, positionZeileEins, positionSpalteEins -1, player, size);
+                var isCatched = IsHirschCatched(playingfield, positionZeileEins, positionSpalteEins - 1, player);                
+
                 playingfield[positionZeileEins, positionSpalteEins - 1] = player.ToString();
+
+                if (isCatched)
+                    return KeyResult.Winn;
             }
             else if (playerMove.Key == ConsoleKey.DownArrow || playerMove.Key == ConsoleKey.S)
             {
@@ -210,8 +229,13 @@ namespace GameCatch
                     return KeyResult.GameOver;
                 }
                 playingfield[positionZeileEins, positionSpalteEins] = "";
-                CatchFunction(playingfield, positionZeileEins + 1, positionSpalteEins, player, size);
+                var isCatched = IsHirschCatched(playingfield, positionZeileEins + 1, positionSpalteEins, player);
+               
+
                 playingfield[positionZeileEins + 1, positionSpalteEins] = player.ToString();
+
+                if (isCatched)
+                    return KeyResult.Winn;
             }
             else
             {
@@ -227,7 +251,8 @@ namespace GameCatch
             int SleepEnterPress = 1000;
             Console.WriteLine("   GAME OVER " + player.ToString() + "!");
             Thread.Sleep(SleepEnterPress);
-            Console.WriteLine("   Press [ENTER]");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("    Press [ENTER]");
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
 
@@ -238,13 +263,14 @@ namespace GameCatch
             playerNameTwo = p;
         }    
 
-        static void CatchFunction(string[,] playingfield, int positionZeileEins, int positionSpalteEins, string player, int size)
+        static bool IsHirschCatched(string[,] playingfield, int positionZeileEins, int positionSpalteEins, string player)
         {
             if (player == hunter && playingfield [positionZeileEins, positionSpalteEins] == hirsch)
             {
-                DrawPlayingField(size, playingfield);
-                WinnFunction(player); // später eine winner Methode erstellen!!
+                return true; 
             }
+
+            return false;
         }
 
         static void WinnFunction(string player)
@@ -253,6 +279,7 @@ namespace GameCatch
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("   WINN " + player.ToString() + " !!!");
             Thread.Sleep(SleepEnterPress);
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("   Press [ENTER]");
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
