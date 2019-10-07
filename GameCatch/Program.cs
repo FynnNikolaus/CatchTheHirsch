@@ -76,7 +76,7 @@ namespace GameCatch
                     if (moveResult == KeyResult.Winn)
                     {
                         DrawPlayingField(size, playingfield);
-                        WinnFunction(player);
+                        WinFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                     if (moveResult == KeyResult.Invalid) 
@@ -253,6 +253,7 @@ namespace GameCatch
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("    Press [ENTER]");
+            Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
 
@@ -273,14 +274,15 @@ namespace GameCatch
             return false;
         }
 
-        static void WinnFunction(string player)
+        static void WinFunction(string player)
         {
             int SleepEnterPress = 1000;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("   WINN " + player.ToString() + " !!!");
+            Console.WriteLine("   WON " + player.ToString() + " !!!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("   Press [ENTER]");
+            Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
     }
