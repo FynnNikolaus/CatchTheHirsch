@@ -20,7 +20,7 @@ namespace GameCatch
         const string hirsch = "\u047E";
         const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
-        enum KeyResult { GameOver, NextPlayer, Invalid, Winn };
+        enum KeyResult { GameOver, NextPlayer, Invalid, Win };
 
         static void Main(string[] args)
         {
@@ -67,22 +67,25 @@ namespace GameCatch
                             player = hunter;
                         }
                         moveResult = KeyPadPlayer(playingfield, size, player);
+
+                        while (moveResult == KeyResult.Invalid)
+                        {
+                            moveResult = KeyPadPlayer(playingfield, size, player);
+                            Console.ForegroundColor = ConsoleColor.Black;
+                        }
                     }
                     if (moveResult == KeyResult.GameOver)
                     {
                         GameOverFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
-                    if (moveResult == KeyResult.Winn)
+                    if (moveResult == KeyResult.Win)
                     {
                         DrawPlayingField(size, playingfield);
                         WinFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
-                    if (moveResult == KeyResult.Invalid) 
-                    {
-                        
-                    }
+                  
                 }
             }
 
@@ -192,7 +195,7 @@ namespace GameCatch
                 playingfield[positionZeile - 1, positionSpalte] = player.ToString();
 
                 if (isCatched)
-                    return KeyResult.Winn;
+                    return KeyResult.Win;
             }
             else if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
             {
@@ -206,7 +209,7 @@ namespace GameCatch
                 playingfield[positionZeile, positionSpalte + 1] = player.ToString();
 
                 if (isCatched)
-                    return KeyResult.Winn;
+                    return KeyResult.Win;
             }
             else if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
             {
@@ -220,7 +223,7 @@ namespace GameCatch
                 playingfield[positionZeile, positionSpalte - 1] = player.ToString();
 
                 if (isCatched)
-                    return KeyResult.Winn;
+                    return KeyResult.Win;
             }
             else if (playerMove.Key == ConsoleKey.DownArrow || playerMove.Key == ConsoleKey.S)
             {
@@ -235,7 +238,7 @@ namespace GameCatch
                 playingfield[positionZeile + 1, positionSpalte] = player.ToString();
 
                 if (isCatched)
-                    return KeyResult.Winn;
+                    return KeyResult.Win;
             }
             else
             {
