@@ -85,7 +85,6 @@ namespace GameCatch
                         WinFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
-                  
                 }
             }
 
