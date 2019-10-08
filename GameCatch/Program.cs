@@ -169,72 +169,73 @@ namespace GameCatch
         static KeyResult KeyPadPlayer(string[,] playingfield, int size, string player)
         {
             var playerMove = Console.ReadKey();
-            var positionZeile = -1;
-            var positionSpalte = -1;
+            Position playerset = new Position();
+            playerset.Line = -1;
+            playerset.Column = -1;
             for (int zeile = 0; zeile < size; zeile++)
             {
                 for (int spalte = 0; spalte < size; spalte++)
                 {
                     if (playingfield[zeile, spalte] == player.ToString())
                     {
-                        positionZeile = zeile;
-                        positionSpalte = spalte;
+                        playerset.Line = zeile;
+                        playerset.Column = spalte;
                     }
                 }
             }
             if (playerMove.Key == ConsoleKey.UpArrow || playerMove.Key == ConsoleKey.W)
             {
-                if (positionZeile - 1 < 0)
+                if (playerset.Line - 1 < 0)
                 {
                     return KeyResult.GameOver;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                var isCatched = IsHirschCatched(playingfield, positionZeile - 1, positionSpalte, player);                    
+                playingfield[playerset.Line, playerset.Column] = "";
+                var isCatched = IsHirschCatched(playingfield, playerset.Line - 1, playerset.Column, player);                    
 
-                playingfield[positionZeile - 1, positionSpalte] = player.ToString();
+                playingfield[playerset.Line - 1, playerset.Column] = player.ToString();
 
                 if (isCatched)
                     return KeyResult.Win;
             }
             else if (playerMove.Key == ConsoleKey.RightArrow || playerMove.Key == ConsoleKey.D)
             {
-                if (positionSpalte + 1 >= size)
+                if (playerset.Column + 1 >= size)
                 {
                     return KeyResult.GameOver;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                var isCatched = IsHirschCatched(playingfield, positionZeile, positionSpalte + 1, player);
+                playingfield[playerset.Line, playerset.Column] = "";
+                var isCatched = IsHirschCatched(playingfield, playerset.Line, playerset.Column + 1, player);
                
-                playingfield[positionZeile, positionSpalte + 1] = player.ToString();
+                playingfield[playerset.Line, playerset.Column + 1] = player.ToString();
 
                 if (isCatched)
                     return KeyResult.Win;
             }
             else if (playerMove.Key == ConsoleKey.LeftArrow || playerMove.Key == ConsoleKey.A)
             {
-                if (positionSpalte - 1 < 0)
+                if (playerset.Column - 1 < 0)
                 {
                     return KeyResult.GameOver;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                var isCatched = IsHirschCatched(playingfield, positionZeile, positionSpalte - 1, player);                
+                playingfield[playerset.Line, playerset.Column] = "";
+                var isCatched = IsHirschCatched(playingfield, playerset.Line, playerset.Column - 1, player);                
 
-                playingfield[positionZeile, positionSpalte - 1] = player.ToString();
+                playingfield[playerset.Line, playerset.Column - 1] = player.ToString();
 
                 if (isCatched)
                     return KeyResult.Win;
             }
             else if (playerMove.Key == ConsoleKey.DownArrow || playerMove.Key == ConsoleKey.S)
             {
-                if (positionZeile + 1 >= size)
+                if (playerset.Line + 1 >= size)
                 {
                     return KeyResult.GameOver;
                 }
-                playingfield[positionZeile, positionSpalte] = "";
-                var isCatched = IsHirschCatched(playingfield, positionZeile + 1, positionSpalte, player);
+                playingfield[playerset.Line, playerset.Column] = "";
+                var isCatched = IsHirschCatched(playingfield, playerset.Line + 1, playerset.Column, player);
                
 
-                playingfield[positionZeile + 1, positionSpalte] = player.ToString();
+                playingfield[playerset.Line + 1, playerset.Column] = player.ToString();
 
                 if (isCatched)
                     return KeyResult.Win;

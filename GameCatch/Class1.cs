@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO; // text file
 
 namespace GameCatch
 {
-    class Position
+    class PlayerRank
     {
-        public int Line { get; set; }
-        public int Column { get; set; }
     }
 }
-
