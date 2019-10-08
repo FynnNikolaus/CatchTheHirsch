@@ -22,6 +22,11 @@ namespace GameCatch
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
         enum KeyResult { GameOver, NextPlayer, Invalid, Win };
 
+        void Funktion1()
+        {
+            //
+        }
+
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
