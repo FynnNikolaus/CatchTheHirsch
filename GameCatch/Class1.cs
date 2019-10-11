@@ -7,5 +7,16 @@ namespace GameCatch
 {
     class PlayerRank
     {
+        static void Score(string[] args)
+        {
+            string score = @"score\Rangliste.txt";
+
+            string[] PayerGameScore = rankInGame(01);
+
+            File.WriteAllLines(score, PlayerGameScore);
+
+
+
+        }
     }
 }
