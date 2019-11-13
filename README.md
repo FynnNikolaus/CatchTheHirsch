@@ -1,2 +1,2 @@
 # CatchTheHirsch
-My first visual studio project 
+A funny catch game that runs in the Windows terminal. 
