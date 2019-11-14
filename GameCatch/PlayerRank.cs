@@ -7,7 +7,7 @@ namespace GameCatch
 {
     class PlayerRank
     {
-    
+        const string seperator = "\u00A6";
         static public void Write(string player, string hirsch, string hunter, string playerNameOne, string playerNameTwo)
         {
             var path = @"C:\develop\Spielerdaten\Rangliste.txt";
@@ -16,19 +16,20 @@ namespace GameCatch
 
             if (player == hunter)
             {
-                name = playerNameOne;
+                name = playerNameOne + seperator;
+                name + 1                                           // Referenzen von an die Wand, Verloren und gewonnen erzeugen 
             }
             if (player == hirsch)
             {
-                name = playerNameTwo;
+                name = playerNameTwo + seperator;
             }
             
             writer.Write("Score:" + " " + name); 
             writer.Close();
-            Console.ReadKey(); // Vorübergehender Bug halter
+            Console.ReadKey(); 
         }
 
-        static public void Show()
+        static public void Show()                                                  
         {
             var pathRead = @"C:\develop\Spielerdaten\Rangliste.txt";
             StreamReader reader = new StreamReader(pathRead);

@@ -20,7 +20,7 @@ namespace GameCatch
         const string hirsch = "\u047E";
         const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
-        enum KeyResult { GameOver, NextPlayer, Invalid, Win };
+       
 
         static void Main(string[] args)
         {
@@ -285,7 +285,7 @@ namespace GameCatch
 
         static void WinFunction(string player, string playerNameOne, string playerNameTwo)
         {
-            PlayerRank.Write(player, hirsch, hunter, playerNameOne, playerNameTwo);
+            
             int SleepEnterPress = 1000;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("   WON " + player.ToString() + " !!!");
@@ -294,6 +294,7 @@ namespace GameCatch
             Console.WriteLine("   Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+            PlayerRank.Write(player, hirsch, hunter, playerNameOne, playerNameTwo);
         }
     }
 
