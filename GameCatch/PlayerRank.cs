@@ -1,0 +1,43 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO; // text file
+
+namespace GameCatch
+{
+    class PlayerRank
+    {
+    
+        static public void Write(string player, string hirsch, string hunter, string playerNameOne, string playerNameTwo)
+        {
+            var path = @"C:\develop\Spielerdaten\Rangliste.txt";
+            StreamWriter writer = new StreamWriter(path);
+            string name = "";
+
+            if (player == hunter)
+            {
+                name = playerNameOne;
+            }
+            if (player == hirsch)
+            {
+                name = playerNameTwo;
+            }
+            
+            writer.Write("Score:" + " " + name); 
+            writer.Close();
+            Console.ReadKey(); // Vorübergehender Bug halter
+        }
+
+        static public void Show()
+        {
+            var pathRead = @"C:\develop\Spielerdaten\Rangliste.txt";
+            StreamReader reader = new StreamReader(pathRead);
+            var rang = reader.ReadToEnd();
+            reader.Close();
+
+            Console.WriteLine(rang);
+        }
+    }
+}
+
+

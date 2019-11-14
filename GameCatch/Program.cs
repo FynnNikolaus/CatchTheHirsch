@@ -31,9 +31,15 @@ namespace GameCatch
             Console.WriteLine("");
             Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
             Console.WriteLine(" Press F1 to START or press F2 to CLOSE");
+            Console.WriteLine("");
+            Console.Write(" ");
+            PlayerRank.Show();
             var MENU = Console.ReadKey(); 
             if (MENU.Key == ConsoleKey.F1)
             {
+                PlayerRank readPlayersInRank = new PlayerRank();  
+                PlayerRank.Show();
+
                 Console.WriteLine("");
                 Console.WriteLine(" Please enter your nickname: ");
                 Console.Write(" Player 1:");
@@ -82,7 +88,7 @@ namespace GameCatch
                     if (moveResult == KeyResult.Win)
                     {
                         DrawPlayingField(size, playingfield);
-                        WinFunction(player);
+                        WinFunction(player, playerNameOne, playerNameTwo);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                 }
@@ -277,8 +283,9 @@ namespace GameCatch
             return false;
         }
 
-        static void WinFunction(string player)
+        static void WinFunction(string player, string playerNameOne, string playerNameTwo)
         {
+            PlayerRank.Write(player, hirsch, hunter, playerNameOne, playerNameTwo);
             int SleepEnterPress = 1000;
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("   WON " + player.ToString() + " !!!");
