@@ -33,12 +33,11 @@ namespace GameCatch
             Console.WriteLine(" Press F1 to START or press F2 to CLOSE");
             Console.WriteLine("");
             Console.Write(" ");
-            PlayerRank.Show();
             var MENU = Console.ReadKey(); 
             if (MENU.Key == ConsoleKey.F1)
             {
                 PlayerRank readPlayersInRank = new PlayerRank();  
-                PlayerRank.Show();
+                PlayerRank.Show(rangliste);
 
                 Console.WriteLine("");
                 Console.WriteLine(" Please enter your nickname: ");
