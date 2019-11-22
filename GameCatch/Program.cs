@@ -24,9 +24,9 @@ namespace GameCatch
 
         static void Main(string[] args)
         {
-            var h = new HighScoreDataSource();
-
-            HighScoreDataSource.PrintHighScores();            
+            var highScores = new HighScoreDataSource();
+            highScores.LoadHighScore();
+            highScores.PrintHighScores();            
 
             Console.OutputEncoding = Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.White;
@@ -93,7 +93,7 @@ namespace GameCatch
                     }
                 }
             }
-
+          
             if (MENU.Key == ConsoleKey.F2)
             {
                 System.Environment.Exit(0); 

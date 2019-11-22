@@ -7,46 +7,48 @@ namespace GameCatch
 {
     class HighScoreDataSource
     {
-        private string _data;
+        const string path = @"C:\develop\Spielerdaten\Rangliste.txt";
         private List<HighScore> _scores;
 
-        public static List<HighScore> LoadHighScore()
+        public void LoadHighScore()
         {
-            var resultList = new List<HighScore>();
-            string path = @"C:\develop\Spielerdaten\Rangliste.txt";
-            if (!File.Exists(path))
+            _scores = new List<HighScore>();
+  
+            if (File.Exists(path))
             {
-                return resultList;
-            }
-
-            using (StreamReader reader = new StreamReader(path))
-            {
-                string line;
-
-                while (!string.IsNullOrEmpty(line = reader.ReadLine()))
+                using (StreamReader reader = new StreamReader(path))
                 {
-                    HighScore highScore = new HighScore();
-                    string[] namePlusScore = line.Split("\u00A6");
-                    highScore.Name = namePlusScore[0];
-                    if (!string.IsNullOrWhiteSpace(namePlusScore[1]))
-                        highScore.Score = int.Parse(namePlusScore[1]);
-                    resultList.Add(highScore);                   
+                    string line;
+
+                    while (!string.IsNullOrEmpty(line = reader.ReadLine()))
+                    {
+                        HighScore highScore = new HighScore();
+                        string[] namePlusScore = line.Split("\u00A6");
+                        highScore.Name = namePlusScore[0];
+                        if (!string.IsNullOrWhiteSpace(namePlusScore[1]))
+                            highScore.Score = int.Parse(namePlusScore[1]);
+
+                        _scores.Add(highScore);
+                    }
                 }
             }
-            return resultList;  
         }
 
-        public static void PrintHighScores()
-        {
-            string x = "sdf";
-            int b = 55;
-            HighScore h = new HighScore();
-
-
-
-            var allHighScores = LoadHighScore();
-            foreach (var score in allHighScores)
+        public void PrintHighScores()
+        {         
+            foreach (var score in _scores)
                 Console.WriteLine(score);
         }
-    }   
+
+        public void SaveHighScore()
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                foreach (var score in _scores)
+                    writer.WriteLine($"{score.Name}\u00A6{score.Score}");
+                
+            }
+
+    }
 }
+    }
