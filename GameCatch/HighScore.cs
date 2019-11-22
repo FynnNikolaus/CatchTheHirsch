@@ -4,7 +4,14 @@ using System.Text;
 
 namespace GameCatch
 {
-    class Class1
+    class HighScore
     {
+        public string Name { get; set; }
+        public int Score { get; set; }
+
+        public override string ToString()
+        {      
+            return $"{Name} has {Score} points";            
+        }
     }
 }

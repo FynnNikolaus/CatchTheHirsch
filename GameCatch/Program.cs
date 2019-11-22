@@ -24,6 +24,10 @@ namespace GameCatch
 
         static void Main(string[] args)
         {
+            var h = new HighScoreDataSource();
+
+            HighScoreDataSource.PrintHighScores();            
+
             Console.OutputEncoding = Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
@@ -36,9 +40,6 @@ namespace GameCatch
             var MENU = Console.ReadKey(); 
             if (MENU.Key == ConsoleKey.F1)
             {
-                PlayerRank readPlayersInRank = new PlayerRank();  
-                PlayerRank.Show(rangliste);
-
                 Console.WriteLine("");
                 Console.WriteLine(" Please enter your nickname: ");
                 Console.Write(" Player 1:");
@@ -293,7 +294,6 @@ namespace GameCatch
             Console.WriteLine("   Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
-            PlayerRank.Write(player, hirsch, hunter, playerNameOne, playerNameTwo);
         }
     }
 
