@@ -51,7 +51,8 @@ namespace GameCatch
                 while (true)
                 {
                     var playingfield = CreatePlayingField(size); 
-                    DrawPlayingField(size, playingfield); 
+                    DrawPlayingField(size, playingfield);
+                    Console.ForegroundColor = PlayerColorRed;
                     Console.WriteLine("    " + playerNameOne + " You're starting!");
                     string player = hunter;
                     var moveResult = KeyPadPlayer(playingfield, size, player);
