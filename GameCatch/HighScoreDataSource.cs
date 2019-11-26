@@ -13,7 +13,7 @@ namespace GameCatch
         public void LoadHighScore()
         {
             _scores = new List<HighScore>();
-  
+
             if (File.Exists(path))
             {
                 using (StreamReader reader = new StreamReader(path))
@@ -34,8 +34,21 @@ namespace GameCatch
             }
         }
 
+        internal HighScore FindByName(string playerName)
+        {
+            foreach (var entry in _scores)
+            {
+                if (entry.Name == playerName)
+                {
+                    return entry;
+                }
+            }
+
+            return null;
+        }
+
         public void PrintHighScores()
-        {         
+        {
             foreach (var score in _scores)
                 Console.WriteLine(score);
         }
@@ -46,9 +59,14 @@ namespace GameCatch
             {
                 foreach (var score in _scores)
                     writer.WriteLine($"{score.Name}\u00A6{score.Score}");
-                
+
             }
+
+        }
+        public void AddNewPlayer(string playername, HighScoreDataSource highScores)
+        {
+            // Add zu der Liste score.Name
+        }
 
     }
 }
-    }

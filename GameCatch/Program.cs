@@ -256,7 +256,7 @@ namespace GameCatch
             return KeyResult.NextPlayer;
         }
 
-        static void GameOverFunction(string player)
+        static ResultForCalculate GameOverFunction(string player)
         {
             int SleepEnterPress = 1000;
             Console.WriteLine("   GAME OVER " + player.ToString() + "!");
@@ -265,6 +265,7 @@ namespace GameCatch
             Console.WriteLine("    Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+            return ResultForCalculate.Lose;
         }
 
         static void PlayerSwitch(ref string playerNameOne, ref string playerNameTwo)
@@ -284,17 +285,18 @@ namespace GameCatch
             return false;
         }
 
-        static void WinFunction(string player, string playerNameOne, string playerNameTwo)
+        public static ResultForCalculate WinFunction(string playerName)
         {
             
             int SleepEnterPress = 1000;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("   WON " + player.ToString() + " !!!");
+            Console.WriteLine("   WON " + playerName.ToString() + " !!!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("   Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+            return ResultForCalculate.Won;
         }
     }
 

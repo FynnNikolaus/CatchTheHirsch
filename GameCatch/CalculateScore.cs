@@ -6,9 +6,32 @@ namespace GameCatch
 {
     class CalculateScore
     {
-        public void calculateScore()
-        {
+        public void calculateScore(ResultForCalculate winScore)
+        {            
+            if (winScore == ResultForCalculate.Won)
+            {
+              
+            }
+        }
 
+        internal static void CalculateLoose(string playerName, HighScoreDataSource highScores)
+        {
+           
+        }
+
+        internal static void CalculateWin(string playerName, HighScoreDataSource highScores)
+        {
+            var highScore = highScores.FindByName(playerName);
+
+            if (highScore != null)
+            {
+                highScore.Score = highScore.Score + 2;
+            }
+            if (highScore = null)
+            {
+                var addPlayer = new HighScoreDataSource();
+                addPlayer.AddNewPlayer();
+            }
         }
     }
 }
@@ -16,5 +39,5 @@ namespace GameCatch
 
 
 
-// Referenz bei WinFunction     aktueller Spieler: player.ToString()
-// Referenz bei GameOver        aktueller Spieler: player.ToString()
+// Referenz bei WinFunction     OBACHT!!! aktueller Spieler: player.ToString()    return ResultForCalculate.Won
+// Referenz bei GameOver        OBACHT!!! aktueller Spieler: player.ToString()    return ResultForCalculate.Lose
