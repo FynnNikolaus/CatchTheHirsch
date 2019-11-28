@@ -34,11 +34,11 @@ namespace GameCatch
             }
         }
 
-        internal HighScore FindByName(string playerName)
+        internal HighScore FindByName(string lastPlayerMove)
         {
             foreach (var entry in _scores)
             {
-                if (entry.Name == playerName)
+                if (entry.Name == lastPlayerMove)
                 {
                     return entry;
                 }
@@ -63,11 +63,22 @@ namespace GameCatch
             }
 
         }
-         public void AddNewPlayer(string playerName)
+         public void AddNewPlayer(string lastPlayerMove)
         {
-            HighScore highScoreName = new HighScore();    
-            playerName = highScoreName.Name;
+            HighScore highScores = new HighScore();    
+            highScores.Name = lastPlayerMove;
+            highScores.Score = 0;
+            _scores.Add(highScores); //Transmit the "Scores", name and the score in the list
         }
-
+        public void AllocatesSymbolToThePlayers(string playerSymbol, string hunter, string hirsch, string playerNameOne, string playerNameTwo)
+        {
+            string lastPlayerMove;
+            if (playerSymbol == hunter)
+            {
+                lastPlayerMove = playerNameOne;
+            }
+           
+            lastPlayerMove = playerNameTwo;
+        }
     }
 }

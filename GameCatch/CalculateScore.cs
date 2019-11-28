@@ -4,38 +4,36 @@ using System.Text;
 
 namespace GameCatch
 {
-    class CalculateScore
+    class CalculateScore                                                                                                                       
     {
-        public void calculateScore(ResultForCalculate winScore)
-        {            
+        public void calculateScore(ResultForCalculate winScore, string lastPlayerMove, HighScoreDataSource highScores)
+        {
+            int resultRating = 0;
+
             if (winScore == ResultForCalculate.Won)
             {
-               // Abspeichern vor beenden  
+                resultRating = 2; 
             }
-        }
+            if (winScore == ResultForCalculate.Lose)
+            {
+                resultRating = -1;
+            }
 
-        internal static void CalculateLoose(string playerName, HighScoreDataSource highScores)
-        {
-           
-        }
 
-        internal static void CalculateWin(string playerName, HighScoreDataSource highScores)
-        {
-            var highScore = highScores.FindByName(playerName);
+            var highScore = highScores.FindByName(lastPlayerMove);
 
             if (highScore == null)
             {
                 var addPlayer = new HighScoreDataSource();
 
-                addPlayer.AddNewPlayer(playerName);
+                addPlayer.AddNewPlayer(lastPlayerMove);
             }
             if (highScore != null)
             {
-                highScore.Score = highScore.Score + 2;
+                highScore.Score = highScore.Score + resultRating;
             }
-            
         }
-    }
+    }          
 }
 
 
