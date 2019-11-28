@@ -63,9 +63,10 @@ namespace GameCatch
             }
 
         }
-        public void AddNewPlayer(string playername, HighScoreDataSource highScores)
+         public void AddNewPlayer(string playerName)
         {
-            // Add zu der Liste score.Name
+            HighScore highScoreName = new HighScore();    
+            playerName = highScoreName.Name;
         }
 
     }

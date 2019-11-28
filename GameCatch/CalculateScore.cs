@@ -10,7 +10,7 @@ namespace GameCatch
         {            
             if (winScore == ResultForCalculate.Won)
             {
-              
+               // Abspeichern vor beenden  
             }
         }
 
@@ -23,21 +23,20 @@ namespace GameCatch
         {
             var highScore = highScores.FindByName(playerName);
 
+            if (highScore == null)
+            {
+                var addPlayer = new HighScoreDataSource();
+
+                addPlayer.AddNewPlayer(playerName);
+            }
             if (highScore != null)
             {
                 highScore.Score = highScore.Score + 2;
             }
-            if (highScore = null)
-            {
-                var addPlayer = new HighScoreDataSource();
-                addPlayer.AddNewPlayer();
-            }
+            
         }
     }
 }
 
 
 
-
-// Referenz bei WinFunction     OBACHT!!! aktueller Spieler: player.ToString()    return ResultForCalculate.Won
-// Referenz bei GameOver        OBACHT!!! aktueller Spieler: player.ToString()    return ResultForCalculate.Lose

@@ -83,13 +83,15 @@ namespace GameCatch
                     }
                     if (moveResult == KeyResult.GameOver)
                     {
+                        CalculateScore.CalculateLoose(player, highScores);
                         GameOverFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                     if (moveResult == KeyResult.Win)
                     {
+                        CalculateScore.CalculateWin(player, highScores);
                         DrawPlayingField(size, playingfield);
-                        WinFunction(player, playerNameOne, playerNameTwo);
+                        WinFunction(player);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                 }
@@ -265,6 +267,7 @@ namespace GameCatch
             Console.WriteLine("    Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+
             return ResultForCalculate.Lose;
         }
 
@@ -296,6 +299,7 @@ namespace GameCatch
             Console.WriteLine("   Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+
             return ResultForCalculate.Won;
         }
     }
