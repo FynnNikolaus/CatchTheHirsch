@@ -48,23 +48,25 @@ namespace GameCatch
         public void PrintHighScores()
         {
             foreach (var score in _scores)
-                Console.WriteLine(score);
+                Console.WriteLine(score); // Nur erste fünf Elemente anzeigen 
         }
 
         public void SaveHighScore()
         {
             using (StreamWriter writer = new StreamWriter(path))
-            {
+            {                                                                                  
                 foreach (var score in _scores)
                     writer.WriteLine($"{score.Name}\u00A6{score.Score}");
             }
         }
-         public void AddNewPlayer(string lastPlayerMove)
+         public HighScore AddNewScore(string playerName)
         {
-            HighScore highScores = new HighScore();    
-            highScores.Name = lastPlayerMove;
-            highScores.Score = 0;
-            _scores.Add(highScores); //Transmit the "Scores", name and the score in the list
+            HighScore highScore = new HighScore();    
+            highScore.Name = playerName;
+            highScore.Score = 0;
+            _scores.Add(highScore); //Transmit the "Scores", name and the score in the list
+
+            return highScore;
         }
         public string GetPlayernameFromSymbol(string playerSymbol, string hunter, string playerNameOne, string playerNameTwo)
         {

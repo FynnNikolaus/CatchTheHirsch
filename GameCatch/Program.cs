@@ -83,18 +83,22 @@ namespace GameCatch
                     }
 
                     var currentPlayerName = highScores.GetPlayernameFromSymbol(player, hunter, playerNameOne, playerNameTwo);
-
+                    var calculater = new CalculateScore();                
                     if (moveResult == KeyResult.GameOver)
                     {                        
                         GameOverFunction(player, currentPlayerName);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
+                        calculater.calculateScore(ResultForCalculate.Lose, currentPlayerName, highScores);    
                     }
                     if (moveResult == KeyResult.Win)
                     {
                         DrawPlayingField(size, playingfield);
                         WinFunction(player, currentPlayerName);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
+                        calculater.calculateScore(ResultForCalculate.Won, currentPlayerName, highScores);
                     }
+
+                    highScores.SaveHighScore();
                 }
             }
           
@@ -285,10 +289,8 @@ namespace GameCatch
             {
                 return true; 
             }
-
             return false;
         }
-
         public static ResultForCalculate WinFunction(string playerSymbol, string lastPlayerName)
         {
             
