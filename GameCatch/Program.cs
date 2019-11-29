@@ -81,15 +81,18 @@ namespace GameCatch
                             Console.ForegroundColor = ConsoleColor.Black;
                         }
                     }
+
+                    var currentPlayerName = highScores.GetPlayernameFromSymbol(player, hunter, playerNameOne, playerNameTwo);
+
                     if (moveResult == KeyResult.GameOver)
-                    {
-                        GameOverFunction(player, lastPlayerMove);
+                    {                        
+                        GameOverFunction(player, currentPlayerName);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                     if (moveResult == KeyResult.Win)
                     {
                         DrawPlayingField(size, playingfield);
-                        WinFunction(player, lastPlayerMove);
+                        WinFunction(player, currentPlayerName);
                         PlayerSwitch(ref playerNameOne, ref playerNameTwo);
                     }
                 }
@@ -256,10 +259,10 @@ namespace GameCatch
             return KeyResult.NextPlayer;
         }
 
-        static ResultForCalculate GameOverFunction(string playerSymbol, string lastPlayerMove)
+        static ResultForCalculate GameOverFunction(string playerSymbol, string lastPlayerName)
         {
             int SleepEnterPress = 1000;
-            Console.WriteLine("   GAME OVER " + playerSymbol.ToString() + lastPlayerMove + "!");
+            Console.WriteLine("   GAME OVER " + playerSymbol + " " + lastPlayerName + "!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("    Press [ENTER]");
@@ -286,12 +289,12 @@ namespace GameCatch
             return false;
         }
 
-        public static ResultForCalculate WinFunction(string playerSymbol, string lastPlayerMove)
+        public static ResultForCalculate WinFunction(string playerSymbol, string lastPlayerName)
         {
             
             int SleepEnterPress = 1000;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("   WON " + playerSymbol.ToString() + lastPlayerMove + " !!!");
+            Console.WriteLine("   WON " + playerSymbol + " " + lastPlayerName + " !!!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("   Press [ENTER]");

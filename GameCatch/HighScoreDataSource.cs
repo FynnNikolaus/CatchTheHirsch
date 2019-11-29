@@ -43,10 +43,8 @@ namespace GameCatch
                     return entry;
                 }
             }
-
             return null;
         }
-
         public void PrintHighScores()
         {
             foreach (var score in _scores)
@@ -59,9 +57,7 @@ namespace GameCatch
             {
                 foreach (var score in _scores)
                     writer.WriteLine($"{score.Name}\u00A6{score.Score}");
-
             }
-
         }
          public void AddNewPlayer(string lastPlayerMove)
         {
@@ -70,15 +66,18 @@ namespace GameCatch
             highScores.Score = 0;
             _scores.Add(highScores); //Transmit the "Scores", name and the score in the list
         }
-        public void AllocatesSymbolToThePlayers(string playerSymbol, string hunter, string hirsch, string playerNameOne, string playerNameTwo)
+        public string GetPlayernameFromSymbol(string playerSymbol, string hunter, string playerNameOne, string playerNameTwo)
         {
-            string lastPlayerMove;
+            string lastPlayerName;
             if (playerSymbol == hunter)
             {
-                lastPlayerMove = playerNameOne;
+                lastPlayerName = playerNameOne;
             }
-           
-            lastPlayerMove = playerNameTwo;
+            else
+            {
+                lastPlayerName = playerNameTwo;
+            }
+            return lastPlayerName;
         }
     }
 }
