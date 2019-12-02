@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Linq;
 
 namespace GameCatch
 {
@@ -12,7 +13,7 @@ namespace GameCatch
 
         public void LoadHighScore()
         {
-            _scores = new List<HighScore>();
+            var list = new List<HighScore>();
 
             if (File.Exists(path))
             {
@@ -28,12 +29,15 @@ namespace GameCatch
                         if (!string.IsNullOrWhiteSpace(namePlusScore[1]))
                             highScore.Score = int.Parse(namePlusScore[1]);
 
-                        _scores.Add(highScore);
+                        list.Add(highScore);
                     }
                 }
             }
+            _scores = list.OrderByDescending(s => s.Score)
+                            .ThenBy(s => s.Name)
+                            .Take(6)
+                            .ToList();
         }
-
         internal HighScore FindByName(string lastPlayerMove)
         {
             foreach (var entry in _scores)
@@ -54,14 +58,14 @@ namespace GameCatch
         public void SaveHighScore()
         {
             using (StreamWriter writer = new StreamWriter(path))
-            {                                                                                  
+            {
                 foreach (var score in _scores)
                     writer.WriteLine($"{score.Name}\u00A6{score.Score}");
             }
         }
-         public HighScore AddNewScore(string playerName)
+        public HighScore AddNewScore(string playerName)
         {
-            HighScore highScore = new HighScore();    
+            HighScore highScore = new HighScore();
             highScore.Name = playerName;
             highScore.Score = 0;
             _scores.Add(highScore); //Transmit the "Scores", name and the score in the list

@@ -10,8 +10,9 @@ namespace GameCatch
         public int Score { get; set; }
 
         public override string ToString()
-        {      
-            return $"{Name} has {Score} points";            
+        {
+            return $" {Name} has {Score} points";
         }
     }
+
 }
