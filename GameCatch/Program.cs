@@ -18,13 +18,6 @@ namespace GameCatch
         const string VerticalLine = "\u2551";
         const string hunter = "\u0466";
         const string hirsch = "\u047E";
-        const string gameTitel = @"
-   ____    _  _____ ____ _   _   _____ _   _ _____   _   _ ___ ____  ____   ____ _   _ 
-  / ___|  / \|_   _/ ___| | | | |_   _| | | | ____| | | | |_ _|  _ \/ ___| / ___| | | |
- | |     / _ \ | || |   | |_| |   | | | |_| |  _|   | |_| || || |_) \___ \| |   | |_| |
- | |___ / ___ \| || |___|  _  |   | | |  _  | |___  |  _  || ||  _ < ___) | |___|  _  |
-  \____/_/   \_\_| \____|_| |_|   |_| |_| |_|_____| |_| |_|___|_| \_\____/ \____|_| |_| 
-";
         const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
        
@@ -37,7 +30,7 @@ namespace GameCatch
             while(true)
             { 
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(gameTitel);
+                Console.WriteLine(Writings.gameTitel);
                 Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
                 Thread.Sleep(2000);
                 Console.WriteLine("");
@@ -48,7 +41,6 @@ namespace GameCatch
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(" Scores ...");
                 highScores.LoadHighScore();
-                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 highScores.PrintHighScores();
                 Console.Write(" ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -131,7 +123,7 @@ namespace GameCatch
         static void DrawPlayingField(int size, string[,] playingfield)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("");
             Console.Write("   " + TopLeftCorner); 
 
@@ -164,7 +156,7 @@ namespace GameCatch
                             Console.ForegroundColor = ConsoleColor.Yellow;
                         }
                         Console.Write(currentField); 
-                        Console.ForegroundColor = ConsoleColor.Magenta;
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
                     }
                 }
 
@@ -288,7 +280,7 @@ namespace GameCatch
             int SleepEnterPress = 1000;
             Console.WriteLine("   GAME OVER " + playerSymbol + " " + lastPlayerName + "!");
             Thread.Sleep(SleepEnterPress);
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("    Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
@@ -318,7 +310,7 @@ namespace GameCatch
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("   WON " + playerSymbol + " " + lastPlayerName + " !!!");
             Thread.Sleep(SleepEnterPress);
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("   Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
