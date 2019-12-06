@@ -35,7 +35,7 @@ namespace GameCatch
             }
             _scores = list.OrderByDescending(s => s.Score)
                             .ThenBy(s => s.Name)
-                            .Take(6)
+                            .Take(10)
                             .ToList();
         }
         internal HighScore FindByName(string lastPlayerMove)
@@ -52,9 +52,8 @@ namespace GameCatch
         public void PrintHighScores()
         {
             foreach (var score in _scores)
-                Console.WriteLine(score); // Nur erste fünf Elemente anzeigen 
+                Console.WriteLine(score); 
         }
-
         public void SaveHighScore()
         {
             using (StreamWriter writer = new StreamWriter(path))
@@ -69,7 +68,6 @@ namespace GameCatch
             highScore.Name = playerName;
             highScore.Score = 0;
             _scores.Add(highScore); //Transmit the "Scores", name and the score in the list
-
             return highScore;
         }
         public string GetPlayernameFromSymbol(string playerSymbol, string hunter, string playerNameOne, string playerNameTwo)
@@ -84,6 +82,16 @@ namespace GameCatch
                 lastPlayerName = playerNameTwo;
             }
             return lastPlayerName;
+        }
+
+        internal void resetAllScore()
+        {
+            File.WriteAllText(path, string.Empty);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("RESET was successfull");
+            Console.Clear();
+
+
         }
     }
 }

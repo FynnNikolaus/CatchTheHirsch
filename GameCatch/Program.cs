@@ -34,89 +34,97 @@ namespace GameCatch
             var highScores = new HighScoreDataSource();
 
             Console.OutputEncoding = Encoding.UTF8;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(gameTitel);
-            Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
-            Thread.Sleep(2000);
-            Console.WriteLine("");
-            Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
-            Console.WriteLine(" Press F1 to START");
-            Console.WriteLine("");
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(" Scores ...");
-            highScores.LoadHighScore();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            highScores.PrintHighScores();
-            Console.Write(" ");
-            Console.ForegroundColor = ConsoleColor.White;
-            var MENU = Console.ReadKey(); 
-            if (MENU.Key == ConsoleKey.F1)
-            {
+            while(true)
+            { 
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(gameTitel);
+                Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
+                Thread.Sleep(2000);
                 Console.WriteLine("");
-                Console.WriteLine(" Please enter your nickname: ");
-                Console.Write(" Player 1:");
-                string playerNameOne = Console.ReadLine();
-                Console.Write(" Player 2:");
-                string playerNameTwo = Console.ReadLine();
-                int size = 11; 
+                Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
+                Console.WriteLine(" Press F1 to START");
+                Console.WriteLine(" Press F2 to RESET");
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine(" Scores ...");
+                highScores.LoadHighScore();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                highScores.PrintHighScores();
+                Console.Write(" ");
+                Console.ForegroundColor = ConsoleColor.White;
+                var MENU = Console.ReadKey(); 
+                if (MENU.Key == ConsoleKey.F1)                                                       
+                { 
+                    Console.WriteLine("");
+                    Console.WriteLine(" Please enter your nickname: ");
+                    Console.Write(" Player 1:");
+                    string playerNameOne = Console.ReadLine();
+                    Console.Write(" Player 2:");
+                    string playerNameTwo = Console.ReadLine();
+                    int size = 11;
 
-                while (true)
-                {
-                    var playingfield = CreatePlayingField(size); 
-                    DrawPlayingField(size, playingfield);
-                    Console.ForegroundColor = PlayerColorRed;
-                    Console.WriteLine("    " + playerNameOne + " You're starting!");
-                    string player = hunter;
-                    var moveResult = KeyPadPlayer(playingfield, size, player);
-                   
-
-                    while (moveResult == KeyResult.NextPlayer)
+                    while (true)
                     {
+                        var playingfield = CreatePlayingField(size);
                         DrawPlayingField(size, playingfield);
-                        if (player == hunter)
-                        {
-                            Console.ForegroundColor = PlayerColorYello;
-                            Console.WriteLine("    " + playerNameTwo + ", you move!");
-                            player = hirsch;
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = PlayerColorRed;
-                            Console.WriteLine("    " + playerNameOne + ", you move!");
-                            player = hunter;
-                        }
-                        moveResult = KeyPadPlayer(playingfield, size, player);
+                        Console.ForegroundColor = PlayerColorRed;
+                        Console.WriteLine("    " + playerNameOne + " You're starting!");
+                        string player = hunter;
+                        var moveResult = KeyPadPlayer(playingfield, size, player);
 
-                        while (moveResult == KeyResult.Invalid)
+
+                        while (moveResult == KeyResult.NextPlayer)
                         {
+                            DrawPlayingField(size, playingfield);
+                            if (player == hunter)
+                            {
+                                Console.ForegroundColor = PlayerColorYello;
+                                Console.WriteLine("    " + playerNameTwo + ", you move!");
+                                player = hirsch;
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = PlayerColorRed;
+                                Console.WriteLine("    " + playerNameOne + ", you move!");
+                                player = hunter;
+                            }
                             moveResult = KeyPadPlayer(playingfield, size, player);
-                            Console.ForegroundColor = ConsoleColor.Black;
+
+                            while (moveResult == KeyResult.Invalid)
+                            {
+                                moveResult = KeyPadPlayer(playingfield, size, player);
+                                Console.ForegroundColor = ConsoleColor.Black;
+                            }
                         }
-                    }
 
-                    var currentPlayerName = highScores.GetPlayernameFromSymbol(player, hunter, playerNameOne, playerNameTwo);
-                    var calculater = new CalculateScore();                
-                    if (moveResult == KeyResult.GameOver)
-                    {                        
-                        GameOverFunction(player, currentPlayerName);
-                        PlayerSwitch(ref playerNameOne, ref playerNameTwo);
-                        calculater.calculateScore(ResultForCalculate.Lose, currentPlayerName, highScores);    
-                    }
-                    if (moveResult == KeyResult.Win)
-                    {
-                        DrawPlayingField(size, playingfield);
-                        WinFunction(player, currentPlayerName);
-                        PlayerSwitch(ref playerNameOne, ref playerNameTwo);
-                        calculater.calculateScore(ResultForCalculate.Won, currentPlayerName, highScores);
-                    }
+                        var currentPlayerName = highScores.GetPlayernameFromSymbol(player, hunter, playerNameOne, playerNameTwo);
+                        var calculater = new CalculateScore();
+                        if (moveResult == KeyResult.GameOver)
+                        {
+                            GameOverFunction(player, currentPlayerName);
+                            PlayerSwitch(ref playerNameOne, ref playerNameTwo);
+                            calculater.calculateScore(ResultForCalculate.Lose, currentPlayerName, highScores);
+                        }
+                        if (moveResult == KeyResult.Win)
+                        {
+                            DrawPlayingField(size, playingfield);
+                            WinFunction(player, currentPlayerName);
+                            PlayerSwitch(ref playerNameOne, ref playerNameTwo);
+                            calculater.calculateScore(ResultForCalculate.Won, currentPlayerName, highScores);
+                        }
 
-                    highScores.SaveHighScore();
+                        highScores.SaveHighScore();
+                    }
                 }
-            }
-          
-            if (MENU.Key != ConsoleKey.F1)
-            {
-                ; 
+
+                if (MENU.Key == ConsoleKey.F2)
+                {
+                    highScores.resetAllScore();
+                }
+                if (MENU.Key != ConsoleKey.F1 || MENU.Key != ConsoleKey.F2 || MENU.Key != ConsoleKey.F3)
+                {
+                    Console.Clear();
+                }
             }
         }
 
