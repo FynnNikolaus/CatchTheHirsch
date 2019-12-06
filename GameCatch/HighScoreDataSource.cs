@@ -70,20 +70,6 @@ namespace GameCatch
             _scores.Add(highScore); //Transmit the "Scores", name and the score in the list
             return highScore;
         }
-        public string GetPlayernameFromSymbol(string playerSymbol, string hunter, string playerNameOne, string playerNameTwo)
-        {
-            string lastPlayerName;
-            if (playerSymbol == hunter)
-            {
-                lastPlayerName = playerNameOne;
-            }
-            else
-            {
-                lastPlayerName = playerNameTwo;
-            }
-            return lastPlayerName;
-        }
-
         internal void resetAllScore()
         {
             File.WriteAllText(path, string.Empty);
