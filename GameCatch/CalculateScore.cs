@@ -6,7 +6,7 @@ namespace GameCatch
 {
     class CalculateScore                                                                                                                       
     {
-        public void calculateScore(ResultForCalculate winScore, string playerName, HighScoreDataSource highScores)
+        public void calculateScore(ResultForCalculate winScore, HumanPlayer player, HighScoreDataSource highScores)
         {
             int resultRating = 0;
 
@@ -19,11 +19,11 @@ namespace GameCatch
                 resultRating = -1;
             }
 
-            var highScore = highScores.FindByName(playerName);
+            var highScore = highScores.FindByName(player.Name);
 
             if (highScore == null)
             {
-                highScore = highScores.AddNewScore(playerName);
+                highScore = highScores.AddNewScore(player.Name);
             } 
 
             if (highScore != null)

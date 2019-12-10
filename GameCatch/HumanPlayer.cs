@@ -8,6 +8,7 @@ namespace GameCatch
     {
         public string Name { get; set; }
         public string Symbol { get; set; }
+        public ConsoleColor Color { get; set; }
         public Direction GetNextMove()
         {
             Direction result = Direction.Up;

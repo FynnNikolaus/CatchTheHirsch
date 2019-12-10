@@ -63,7 +63,7 @@ namespace GameCatch
                     HumanPlayer actualPlayer = playerOne;
                     while (true)
                     {
-                        var playingfield = CreatePlayingField(size);
+                        var playingfield = CreatePlayingField(size, playerOne, playerTwo);
                         DrawPlayingField(size, playingfield);
                         Console.ForegroundColor = PlayerColorRed;
                         Console.WriteLine("    " + actualPlayer.Name + " You're starting!");
@@ -156,7 +156,7 @@ namespace GameCatch
             Console.WriteLine(BelowRightCorner);
         }
 
-        static string[,] CreatePlayingField(int size)
+        static string[,] CreatePlayingField(int size, HumanPlayer playerOne, HumanPlayer playertwo)
         {
             string[,] playingfield = new string[size, size]; 
 
@@ -169,8 +169,8 @@ namespace GameCatch
                 }
             }
             // set player in the array 
-            playingfield[5, 5] = hunter;
-            playingfield[9, 8] = hirsch;
+            playingfield[5, 5] = playerOne.Symbol;
+            playingfield[9, 8] = playertwo.Symbol;
 
             return playingfield;
         }
@@ -185,7 +185,7 @@ namespace GameCatch
             {
                 for (int spalte = 0; spalte < size; spalte++)
                 {
-                    if (playingfield[zeile, spalte] == player.ToString())
+                    if (playingfield[zeile, spalte] == player.Symbol)
                     {
                         playerset.Line = zeile;
                         playerset.Column = spalte;
@@ -201,12 +201,12 @@ namespace GameCatch
                 playingfield[playerset.Line, playerset.Column] = "";
                 var isCatched = IsHirschCatched(playingfield, playerset.Line - 1, playerset.Column, player);                    
 
-                playingfield[playerset.Line - 1, playerset.Column] = player.ToString();
+                playingfield[playerset.Line - 1, playerset.Column] = player.Symbol;
 
                 if (isCatched)
                     return KeyResult.Win;
             }
-            else if (playerMove == Direction.Down)
+            else if (playerMove == Direction.Right)
             {
                 if (playerset.Column + 1 >= size)
                 {
@@ -215,7 +215,7 @@ namespace GameCatch
                 playingfield[playerset.Line, playerset.Column] = "";
                 var isCatched = IsHirschCatched(playingfield, playerset.Line, playerset.Column + 1, player);
                
-                playingfield[playerset.Line, playerset.Column + 1] = player.ToString();
+                playingfield[playerset.Line, playerset.Column + 1] = player.Symbol;
 
                 if (isCatched)
                     return KeyResult.Win;
@@ -229,12 +229,12 @@ namespace GameCatch
                 playingfield[playerset.Line, playerset.Column] = "";
                 var isCatched = IsHirschCatched(playingfield, playerset.Line, playerset.Column - 1, player);                
 
-                playingfield[playerset.Line, playerset.Column - 1] = player.ToString();
+                playingfield[playerset.Line, playerset.Column - 1] = player.Symbol;
 
                 if (isCatched)
                     return KeyResult.Win;
             }
-            else if (playerMove == Direction.Up)
+            else if (playerMove == Direction.Down)
             {
                 if (playerset.Line + 1 >= size)
                 {
@@ -243,8 +243,7 @@ namespace GameCatch
                 playingfield[playerset.Line, playerset.Column] = "";
                 var isCatched = IsHirschCatched(playingfield, playerset.Line + 1, playerset.Column, player);
                
-
-                playingfield[playerset.Line + 1, playerset.Column] = player.ToString();
+                playingfield[playerset.Line + 1, playerset.Column] = player.Symbol;
 
                 if (isCatched)
                     return KeyResult.Win;
