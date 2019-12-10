@@ -20,8 +20,12 @@ namespace GameCatch
         const string hirsch = "\u047E";
         const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
-       
+        static Dictionary<string, ConsoleColor> colors = new Dictionary<string, ConsoleColor> {
+            { hunter, ConsoleColor.Red },
+            { hirsch, ConsoleColor.Yellow }
 
+        };
+            
         static void Main(string[] args)
         {
             var highScores = new HighScoreDataSource();
@@ -53,43 +57,49 @@ namespace GameCatch
                     var playerOne = new HumanPlayer(); 
                     playerOne.Name = Console.ReadLine();
                     playerOne.Symbol = hunter;
-                    playerOne.Color = ConsoleColor.Red;
+    
                     Console.Write(" Player 2:");
                     var playerTwo = new HumanPlayer();
                     playerTwo.Name = Console.ReadLine();
                     playerTwo.Symbol = hirsch;
-                    playerTwo.Color = ConsoleColor.Yellow;
                     int size = 11;
-                    HumanPlayer actualPlayer = playerOne;
+                    HumanPlayer playerWhooseTurnItCurrentlyIs = playerOne;
+                    HumanPlayer playerThatStartsTheNextGame = playerOne;
+
                     while (true)
                     {
-                        var playingfield = CreatePlayingField(size, playerOne, playerTwo);
+                        playerWhooseTurnItCurrentlyIs = playerThatStartsTheNextGame;
+
+                        var playingfield = CreatePlayingField(size, playerOne, playerTwo, playerThatStartsTheNextGame);
                         DrawPlayingField(size, playingfield);
                         Console.ForegroundColor = PlayerColorRed;
-                        Console.WriteLine("    " + actualPlayer.Name + " You're starting!");
-                        var moveResult = KeyPadPlayer(playingfield, size, actualPlayer);
+                        Console.WriteLine("    " + playerThatStartsTheNextGame.Name + " You're starting!");
+                        var moveResult = KeyPadPlayer(playingfield, size, playerWhooseTurnItCurrentlyIs);
                         while (moveResult == KeyResult.NextPlayer)
                         {
+                            playerWhooseTurnItCurrentlyIs = PlayerSwitch(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
                             DrawPlayingField(size, playingfield);
-                            Console.ForegroundColor = actualPlayer.Color;
-                            Console.WriteLine("    " + actualPlayer.Name + ", you move!");
-                            moveResult = KeyPadPlayer(playingfield, size, actualPlayer);
+                            Console.ForegroundColor = colors[playerWhooseTurnItCurrentlyIs.Symbol];
+                            Console.WriteLine("    " + playerWhooseTurnItCurrentlyIs.Name + ", you move!");
+                            moveResult = KeyPadPlayer(playingfield, size, playerWhooseTurnItCurrentlyIs);
                         }
                         var calculater = new CalculateScore();
                         if (moveResult == KeyResult.GameOver)
                         {
-                            GameOverFunction(actualPlayer);
-                            calculater.calculateScore(ResultForCalculate.Lose, actualPlayer, highScores);
+                            GameOverFunction(playerWhooseTurnItCurrentlyIs);
+                            calculater.calculateScore(ResultForCalculate.Lose, playerWhooseTurnItCurrentlyIs, highScores);
                         }
                         if (moveResult == KeyResult.Win)
                         {
-                            WinFunction(actualPlayer);
+                            WinFunction(playerWhooseTurnItCurrentlyIs);
                             
-                            calculater.calculateScore(ResultForCalculate.Won, actualPlayer, highScores);
+                            calculater.calculateScore(ResultForCalculate.Won, playerWhooseTurnItCurrentlyIs, highScores);
                         }
-                        actualPlayer = PlayerSwitch(playerOne, playerTwo, actualPlayer);
+                        SymbolSwitch(playerOne, playerTwo);
+                        playerThatStartsTheNextGame = PlayerSwitch(playerOne, playerTwo, playerThatStartsTheNextGame);
                         highScores.SaveHighScore();
                     }
+
                 }
 
                 if (MENU.Key == ConsoleKey.F2)
@@ -156,7 +166,7 @@ namespace GameCatch
             Console.WriteLine(BelowRightCorner);
         }
 
-        static string[,] CreatePlayingField(int size, HumanPlayer playerOne, HumanPlayer playertwo)
+        static string[,] CreatePlayingField(int size, HumanPlayer playerOne, HumanPlayer playertwo, HumanPlayer playerWhoStartsTheGame)
         {
             string[,] playingfield = new string[size, size]; 
 
@@ -168,9 +178,17 @@ namespace GameCatch
                     playingfield[i, j] = ""; 
                 }
             }
-            // set player in the array 
-            playingfield[5, 5] = playerOne.Symbol;
-            playingfield[9, 8] = playertwo.Symbol;
+
+            if (playerWhoStartsTheGame == playerOne)
+            {
+                playingfield[5, 5] = playerOne.Symbol;
+                playingfield[9, 8] = playertwo.Symbol;
+            }
+            else 
+            {
+                playingfield[9, 8] = playerOne.Symbol;
+                playingfield[5, 5] = playertwo.Symbol;
+            }   
 
             return playingfield;
         }
@@ -276,6 +294,13 @@ namespace GameCatch
                 return playerOne;
 
             return playerTwo;
+        }
+
+        static void SymbolSwitch(HumanPlayer playerOne, HumanPlayer playerTwo)
+        {
+            string oldPlayerOne = playerOne.Symbol;
+            playerOne.Symbol = playerTwo.Symbol;
+            playerTwo.Symbol = oldPlayerOne;
         }
 
         private static bool IsHirschCatched(string[,] playingfield, int positionZeileEins, int positionSpalteEins, HumanPlayer player)
