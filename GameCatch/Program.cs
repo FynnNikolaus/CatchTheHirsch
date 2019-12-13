@@ -10,19 +10,13 @@ namespace GameCatch
     class Program
 
     {
-        const string BelowLeftCorner = "\u255A";
-        const string BelowRightCorner = "\u255D";
-        const string TopLeftCorner = "\u2554";
-        const string TopRightCorner = "\u2557";
-        const string HorizontalLine = "\u2550";
-        const string VerticalLine = "\u2551";
-        const string hunter = "\u0466";
-        const string hirsch = "\u047E";
+        public const string HUNTER = "\u0466";
+        public const string HIRSCH = "\u047E";
         const ConsoleColor PlayerColorYello = ConsoleColor.Yellow;
         const ConsoleColor PlayerColorRed = ConsoleColor.Red;
         static Dictionary<string, ConsoleColor> colors = new Dictionary<string, ConsoleColor> {
-            { hunter, ConsoleColor.Red },
-            { hirsch, ConsoleColor.Yellow }
+            { HUNTER, ConsoleColor.Red },
+            { HIRSCH, ConsoleColor.Yellow }
 
         };
             
@@ -56,40 +50,44 @@ namespace GameCatch
                     Console.Write(" Player 1:");
                     var playerOne = new HumanPlayer(); 
                     playerOne.Name = Console.ReadLine();
-                    playerOne.Symbol = hunter;
+                    playerOne.Symbol = HUNTER;
     
                     Console.Write(" Player 2:");
                     var playerTwo = new HumanPlayer();
                     playerTwo.Name = Console.ReadLine();
-                    playerTwo.Symbol = hirsch;
+                    playerTwo.Symbol = HIRSCH;
                     int size = 11;
                     HumanPlayer playerWhooseTurnItCurrentlyIs = playerOne;
                     HumanPlayer playerThatStartsTheNextGame = playerOne;
 
+                    var playingfield = new PlayingField(size);
+
                     while (true)
                     {
                         playerWhooseTurnItCurrentlyIs = playerThatStartsTheNextGame;
-
-                        var playingfield = CreatePlayingField(size, playerOne, playerTwo, playerThatStartsTheNextGame);
-                        DrawPlayingField(size, playingfield);
+      
+                        playingfield.SetPlayerPosition(playerOne, playerTwo, playerThatStartsTheNextGame);
+                        playingfield.Draw();
                         Console.ForegroundColor = PlayerColorRed;
-                        Console.WriteLine("    " + playerThatStartsTheNextGame.Name + " You're starting!");
-                        var moveResult = KeyPadPlayer(playingfield, size, playerWhooseTurnItCurrentlyIs);
-                        while (moveResult == KeyResult.NextPlayer)
+                        Console.WriteLine("    " + playerThatStartsTheNextGame.Name + " You're catch!");
+                        var moveResult = MoveResult.Successfull;
+                        while (moveResult == MoveResult.Successfull)
                         {
+                            var direction = playerWhooseTurnItCurrentlyIs.GetNextMove();
+                            moveResult = playingfield.MovePlayer(playerWhooseTurnItCurrentlyIs, direction);
                             playerWhooseTurnItCurrentlyIs = PlayerSwitch(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
-                            DrawPlayingField(size, playingfield);
+                            playingfield.Draw();
                             Console.ForegroundColor = colors[playerWhooseTurnItCurrentlyIs.Symbol];
                             Console.WriteLine("    " + playerWhooseTurnItCurrentlyIs.Name + ", you move!");
-                            moveResult = KeyPadPlayer(playingfield, size, playerWhooseTurnItCurrentlyIs);
+                           
                         }
                         var calculater = new CalculateScore();
-                        if (moveResult == KeyResult.GameOver)
+                        if (moveResult == MoveResult.OnTheWall)                                                                                                              
                         {
                             GameOverFunction(playerWhooseTurnItCurrentlyIs);
                             calculater.calculateScore(ResultForCalculate.Lose, playerWhooseTurnItCurrentlyIs, highScores);
                         }
-                        if (moveResult == KeyResult.Win)
+                        if (moveResult == MoveResult.Catched)
                         {
                             WinFunction(playerWhooseTurnItCurrentlyIs);
                             
@@ -111,168 +109,6 @@ namespace GameCatch
                     Console.Clear();
                 }
             }
-        }
-
-        static void DrawPlayingField(int size, string[,] playingfield)
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("");
-            Console.Write("   " + TopLeftCorner); 
-
-            for (int i = 0; i < (size); i++)
-            {
-                Console.Write(HorizontalLine); 
-            }
-
-            Console.WriteLine(TopRightCorner); 
-
-            for (int zeile = 0; zeile < size; zeile++)
-            {
-                Console.Write("   " + VerticalLine); 
-
-                for (int spalte = 0; spalte < (size); spalte++)
-                {
-                    var currentField = playingfield[zeile, spalte];
-                    if (currentField == "")
-                    {
-                        Console.Write(" "); 
-                    }
-                    else
-                    {
-                        if (currentField == hunter)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        }
-                        if (currentField == hirsch)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                        }
-                        Console.Write(currentField); 
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    }
-                }
-
-                Console.WriteLine(VerticalLine); 
-            }
-            
-            Console.Write("   " + BelowLeftCorner);
-
-            for (int i = 0; i < (size); i++)
-            {
-                Console.Write(HorizontalLine);
-            }
-
-            Console.WriteLine(BelowRightCorner);
-        }
-
-        static string[,] CreatePlayingField(int size, HumanPlayer playerOne, HumanPlayer playertwo, HumanPlayer playerWhoStartsTheGame)
-        {
-            string[,] playingfield = new string[size, size]; 
-
-            for (int i = 0; i < size; i++)
-            {
-
-                for (int j = 0; j < size; j++)
-                {
-                    playingfield[i, j] = ""; 
-                }
-            }
-
-            if (playerWhoStartsTheGame == playerOne)
-            {
-                playingfield[5, 5] = playerOne.Symbol;
-                playingfield[9, 8] = playertwo.Symbol;
-            }
-            else 
-            {
-                playingfield[9, 8] = playerOne.Symbol;
-                playingfield[5, 5] = playertwo.Symbol;
-            }   
-
-            return playingfield;
-        }
-
-        static KeyResult KeyPadPlayer(string[,] playingfield, int size, HumanPlayer player)
-        {
-            var playerMove = player.GetNextMove();
-            Position playerset = new Position();
-            playerset.Line = -1;
-            playerset.Column = -1;
-            for (int zeile = 0; zeile < size; zeile++)
-            {
-                for (int spalte = 0; spalte < size; spalte++)
-                {
-                    if (playingfield[zeile, spalte] == player.Symbol)
-                    {
-                        playerset.Line = zeile;
-                        playerset.Column = spalte;
-                    }
-                }
-            }
-            if (playerMove == Direction.Up)
-            {
-                if (playerset.Line - 1 < 0)
-                {
-                    return KeyResult.GameOver;
-                }
-                playingfield[playerset.Line, playerset.Column] = "";
-                var isCatched = IsHirschCatched(playingfield, playerset.Line - 1, playerset.Column, player);                    
-
-                playingfield[playerset.Line - 1, playerset.Column] = player.Symbol;
-
-                if (isCatched)
-                    return KeyResult.Win;
-            }
-            else if (playerMove == Direction.Right)
-            {
-                if (playerset.Column + 1 >= size)
-                {
-                    return KeyResult.GameOver;
-                }
-                playingfield[playerset.Line, playerset.Column] = "";
-                var isCatched = IsHirschCatched(playingfield, playerset.Line, playerset.Column + 1, player);
-               
-                playingfield[playerset.Line, playerset.Column + 1] = player.Symbol;
-
-                if (isCatched)
-                    return KeyResult.Win;
-            }
-            else if (playerMove == Direction.Left)
-            {
-                if (playerset.Column - 1 < 0)
-                {
-                    return KeyResult.GameOver;
-                }
-                playingfield[playerset.Line, playerset.Column] = "";
-                var isCatched = IsHirschCatched(playingfield, playerset.Line, playerset.Column - 1, player);                
-
-                playingfield[playerset.Line, playerset.Column - 1] = player.Symbol;
-
-                if (isCatched)
-                    return KeyResult.Win;
-            }
-            else if (playerMove == Direction.Down)
-            {
-                if (playerset.Line + 1 >= size)
-                {
-                    return KeyResult.GameOver;
-                }
-                playingfield[playerset.Line, playerset.Column] = "";
-                var isCatched = IsHirschCatched(playingfield, playerset.Line + 1, playerset.Column, player);
-               
-                playingfield[playerset.Line + 1, playerset.Column] = player.Symbol;
-
-                if (isCatched)
-                    return KeyResult.Win;
-            }
-            else
-            {
-                return KeyResult.Invalid;
-            }
-
-
-            return KeyResult.NextPlayer;
         }
 
         static ResultForCalculate GameOverFunction(HumanPlayer player)
@@ -303,14 +139,6 @@ namespace GameCatch
             playerTwo.Symbol = oldPlayerOne;
         }
 
-        private static bool IsHirschCatched(string[,] playingfield, int positionZeileEins, int positionSpalteEins, HumanPlayer player)
-        {
-            if (player.Symbol == hunter && playingfield [positionZeileEins, positionSpalteEins] == hirsch)
-            {
-                return true; 
-            }
-            return false;
-        }
         public static ResultForCalculate WinFunction(HumanPlayer player)
         {
             
