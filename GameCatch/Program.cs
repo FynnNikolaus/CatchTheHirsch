@@ -30,7 +30,6 @@ namespace GameCatch
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(Writings.gameTitel);
                 Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
-                Thread.Sleep(0);
                 Console.WriteLine("");
                 Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
                 Console.WriteLine(" Press F1 to START");
@@ -70,6 +69,7 @@ namespace GameCatch
                         playingfield.Draw();
                         Console.ForegroundColor = PlayerColorRed;
                         Console.WriteLine("    " + playerThatStartsTheNextGame.Name + " You're catch!");
+                        Console.ForegroundColor = ConsoleColor.Black;
                         var moveResult = MoveResult.Successfull;
                         while (moveResult == MoveResult.Successfull)
                         {
@@ -82,6 +82,8 @@ namespace GameCatch
                             playingfield.Draw();
                             Console.ForegroundColor = colors[playerWhooseTurnItCurrentlyIs.Symbol];
                             Console.WriteLine("    " + playerWhooseTurnItCurrentlyIs.Name + ", you move!");
+                            if(moveResult == MoveResult.Successfull)
+                                Console.ForegroundColor = ConsoleColor.Black;
                         }
                         var calculater = new CalculateScore();
                         if (moveResult == MoveResult.OnTheWall)                                                                                                              
@@ -99,7 +101,6 @@ namespace GameCatch
                         playerThatStartsTheNextGame = PlayerSwitch(playerOne, playerTwo, playerThatStartsTheNextGame);
                         highScores.SaveHighScore();
                     }
-
                 }
 
                 if (MENU.Key == ConsoleKey.F2)
@@ -115,7 +116,7 @@ namespace GameCatch
 
         static ResultForCalculate GameOverFunction(HumanPlayer player)
         {
-            int SleepEnterPress = 0;                                                                                     // Obacht 
+            int SleepEnterPress = 0;                                                                                     
             Console.WriteLine("    GAME OVER " + player.Symbol + " " + player.Name + "!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.DarkCyan;

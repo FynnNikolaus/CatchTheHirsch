@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace GameCatch
 {
@@ -38,7 +39,7 @@ namespace GameCatch
                             .Take(10)
                             .ToList();
         }
-        internal HighScore FindByName(string lastPlayerMove)
+        internal HighScore FindByName(string lastPlayerMove)               // Program
         {
             foreach (var entry in _scores)
             {
@@ -67,17 +68,13 @@ namespace GameCatch
             HighScore highScore = new HighScore();
             highScore.Name = playerName;
             highScore.Score = 0;
-            _scores.Add(highScore); //Transmit the "Scores", name and the score in the list
+            _scores.Add(highScore); 
             return highScore;
         }
         internal void resetAllScore()
         {
             File.WriteAllText(path, string.Empty);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("RESET was successfull");
             Console.Clear();
-
-
         }
     }
 }
