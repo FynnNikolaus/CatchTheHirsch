@@ -83,7 +83,6 @@ namespace GameCatch
                 }
                 _playingfield[playerPosition.Line, playerPosition.Column] = "";
                 var isCatched = IsHirschCatched(_playingfield, playerPosition.Line, playerPosition.Column - 1, player);
-
                 _playingfield[playerPosition.Line, playerPosition.Column - 1] = player.Symbol;
 
                 if (isCatched)
@@ -104,7 +103,7 @@ namespace GameCatch
                 if (isCatched)
                     return MoveResult.Catched;
             }
-
+            
             else
             {
                 return MoveResult.PlayerFailed;

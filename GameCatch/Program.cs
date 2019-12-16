@@ -30,7 +30,7 @@ namespace GameCatch
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(Writings.gameTitel);
                 Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
-                Thread.Sleep(2000);
+                Thread.Sleep(0);
                 Console.WriteLine("");
                 Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
                 Console.WriteLine(" Press F1 to START");
@@ -79,7 +79,6 @@ namespace GameCatch
                             playingfield.Draw();
                             Console.ForegroundColor = colors[playerWhooseTurnItCurrentlyIs.Symbol];
                             Console.WriteLine("    " + playerWhooseTurnItCurrentlyIs.Name + ", you move!");
-                           
                         }
                         var calculater = new CalculateScore();
                         if (moveResult == MoveResult.OnTheWall)                                                                                                              
@@ -89,7 +88,7 @@ namespace GameCatch
                         }
                         if (moveResult == MoveResult.Catched)
                         {
-                            WinFunction(playerWhooseTurnItCurrentlyIs);
+                            WinFunction(playerThatStartsTheNextGame);
                             
                             calculater.calculateScore(ResultForCalculate.Won, playerWhooseTurnItCurrentlyIs, highScores);
                         }
@@ -114,7 +113,7 @@ namespace GameCatch
         static ResultForCalculate GameOverFunction(HumanPlayer player)
         {
             int SleepEnterPress = 1000;
-            Console.WriteLine("   GAME OVER " + player.Symbol + " " + player.Name + "!");
+            Console.WriteLine("    GAME OVER " + player.Symbol + " " + player.Name + "!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("    Press [ENTER]");
@@ -144,7 +143,7 @@ namespace GameCatch
             
             int SleepEnterPress = 1000;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("   WON " + player.Symbol + " " + player.Name + " !!!");
+            Console.WriteLine("    WON " + player.Symbol + " " + player.Name + " !!!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("   Press [ENTER]");
