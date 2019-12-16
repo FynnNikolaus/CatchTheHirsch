@@ -19,7 +19,7 @@ namespace GameCatch
             { HIRSCH, ConsoleColor.Yellow }
 
         };
-            
+    
         static void Main(string[] args)
         {
             var highScores = new HighScoreDataSource();
@@ -62,7 +62,7 @@ namespace GameCatch
 
                     var playingfield = new PlayingField(size);
 
-                    while (true)
+                    while (true)                                                                                                                 
                     {
                         playerWhooseTurnItCurrentlyIs = playerThatStartsTheNextGame;
       
@@ -73,9 +73,12 @@ namespace GameCatch
                         var moveResult = MoveResult.Successfull;
                         while (moveResult == MoveResult.Successfull)
                         {
-                            var direction = playerWhooseTurnItCurrentlyIs.GetNextMove();
+                            var direction = playerWhooseTurnItCurrentlyIs.GetNextMove();                                                            
                             moveResult = playingfield.MovePlayer(playerWhooseTurnItCurrentlyIs, direction);
-                            playerWhooseTurnItCurrentlyIs = PlayerSwitch(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
+                            
+                            if(moveResult == MoveResult.Successfull)
+                                playerWhooseTurnItCurrentlyIs = PlayerSwitch(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
+                            
                             playingfield.Draw();
                             Console.ForegroundColor = colors[playerWhooseTurnItCurrentlyIs.Symbol];
                             Console.WriteLine("    " + playerWhooseTurnItCurrentlyIs.Name + ", you move!");
@@ -88,9 +91,9 @@ namespace GameCatch
                         }
                         if (moveResult == MoveResult.Catched)
                         {
-                            WinFunction(playerThatStartsTheNextGame);
+                            WinFunction(playerWhooseTurnItCurrentlyIs);
                             
-                            calculater.calculateScore(ResultForCalculate.Won, playerWhooseTurnItCurrentlyIs, highScores);
+                            calculater.calculateScore(ResultForCalculate.Won, playerThatStartsTheNextGame, highScores);
                         }
                         SymbolSwitch(playerOne, playerTwo);
                         playerThatStartsTheNextGame = PlayerSwitch(playerOne, playerTwo, playerThatStartsTheNextGame);
@@ -112,7 +115,7 @@ namespace GameCatch
 
         static ResultForCalculate GameOverFunction(HumanPlayer player)
         {
-            int SleepEnterPress = 1000;
+            int SleepEnterPress = 0;                                                                                     // Obacht 
             Console.WriteLine("    GAME OVER " + player.Symbol + " " + player.Name + "!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -140,13 +143,11 @@ namespace GameCatch
 
         public static ResultForCalculate WinFunction(HumanPlayer player)
         {
-            
-            int SleepEnterPress = 1000;
-            Console.ForegroundColor = ConsoleColor.Red;
+            int SleepEnterPress = 0;
             Console.WriteLine("    WON " + player.Symbol + " " + player.Name + " !!!");
             Thread.Sleep(SleepEnterPress);
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("   Press [ENTER]");
+            Console.WriteLine("    Press [ENTER]");
             Console.ForegroundColor = ConsoleColor.Black;
             while (Console.ReadKey().Key != ConsoleKey.Enter) { }
 
