@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GameCatch.Players;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GameCatch
 {
-    class HumanPlayer
+    class HumanPlayer : IPlayer
     {
         public string Name { get; set; }
         public string Symbol { get; set; }

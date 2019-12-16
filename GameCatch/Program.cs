@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameCatch.Players;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -56,8 +57,8 @@ namespace GameCatch
                     playerTwo.Name = Console.ReadLine();
                     playerTwo.Symbol = HIRSCH;
                     int size = 11;
-                    HumanPlayer playerWhooseTurnItCurrentlyIs = playerOne;
-                    HumanPlayer playerThatStartsTheNextGame = playerOne;
+                    IPlayer playerWhooseTurnItCurrentlyIs = playerOne;
+                    IPlayer playerThatStartsTheNextGame = playerOne;
 
                     var playingfield = new PlayingField(size);
 
@@ -114,7 +115,7 @@ namespace GameCatch
             }
         }
 
-        static ResultForCalculate GameOverFunction(HumanPlayer player)
+        static ResultForCalculate GameOverFunction(IPlayer player)
         {
             int SleepEnterPress = 0;                                                                                     
             Console.WriteLine("    GAME OVER " + player.Symbol + " " + player.Name + "!");
@@ -127,7 +128,7 @@ namespace GameCatch
             return ResultForCalculate.Lose;
         }
 
-        static HumanPlayer PlayerSwitch(HumanPlayer playerOne, HumanPlayer playerTwo, HumanPlayer actualPlayer)
+        static IPlayer PlayerSwitch(IPlayer playerOne, IPlayer playerTwo, IPlayer actualPlayer)
         {
             if (actualPlayer == playerTwo)
                 return playerOne;
@@ -135,14 +136,14 @@ namespace GameCatch
             return playerTwo;
         }
 
-        static void SymbolSwitch(HumanPlayer playerOne, HumanPlayer playerTwo)
+        static void SymbolSwitch(IPlayer playerOne, IPlayer playerTwo)
         {
             string oldPlayerOne = playerOne.Symbol;
             playerOne.Symbol = playerTwo.Symbol;
             playerTwo.Symbol = oldPlayerOne;
         }
 
-        public static ResultForCalculate WinFunction(HumanPlayer player)
+        public static ResultForCalculate WinFunction(IPlayer player)
         {
             int SleepEnterPress = 0;
             Console.WriteLine("    WON " + player.Symbol + " " + player.Name + " !!!");

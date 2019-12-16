@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameCatch.Players;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,7 @@ namespace GameCatch
 {
     class CalculateScore                                                                                                                       
     {
-        public void calculateScore(ResultForCalculate winScore, HumanPlayer player, HighScoreDataSource highScores)
+        public void calculateScore(ResultForCalculate winScore, IPlayer player, HighScoreDataSource highScores)
         {
             int resultRating = 0;
 

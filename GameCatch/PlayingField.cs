@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameCatch.Players;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,7 +23,7 @@ namespace GameCatch
             ClearPlayingField();
         }
 
-        private Position GetPlayerPosition(HumanPlayer player)
+        private Position GetPlayerPosition(IPlayer player)
         {
             Position playerset = new Position();
 
@@ -43,7 +44,7 @@ namespace GameCatch
             return playerset;
         }
 
-        public MoveResult MovePlayer(HumanPlayer player, Direction playerMove)
+        public MoveResult MovePlayer(IPlayer player, Direction playerMove)
         {
             var playerPosition = GetPlayerPosition(player);
             if (playerMove == Direction.Up)
@@ -111,7 +112,7 @@ namespace GameCatch
 
             return MoveResult.Successfull;
         }
-        private static bool IsHirschCatched(string[,] playingfield, int positionZeileEins, int positionSpalteEins, HumanPlayer player)
+        private static bool IsHirschCatched(string[,] playingfield, int positionZeileEins, int positionSpalteEins, IPlayer player)
         {
             if (player.Symbol == Program.HUNTER && playingfield[positionZeileEins, positionSpalteEins] == Program.HIRSCH)
             {
@@ -183,7 +184,7 @@ namespace GameCatch
             }
         }
 
-        public void SetPlayerPosition(HumanPlayer playerOne, HumanPlayer playertwo, HumanPlayer playerWhoStartsTheGame)
+        public void SetPlayerPosition(IPlayer playerOne, IPlayer playertwo, IPlayer playerWhoStartsTheGame)
         {
             ClearPlayingField();
 
