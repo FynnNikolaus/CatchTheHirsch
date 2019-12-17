@@ -191,11 +191,11 @@ namespace GameCatch
             if (playerWhoStartsTheGame == playerOne)
             {
                 _playingfield[5, 5] = playerOne.Symbol;
-                _playingfield[9, 8] = playertwo.Symbol;
+                _playingfield[3, 4] = playertwo.Symbol;  // Normal 9, 8
             }
             else
             {
-                _playingfield[9, 8] = playerOne.Symbol;
+                _playingfield[3, 4] = playerOne.Symbol;  // Normal 9, 8
                 _playingfield[5, 5] = playertwo.Symbol;
             }
         }

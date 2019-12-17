@@ -35,6 +35,7 @@ namespace GameCatch
                 Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
                 Console.WriteLine(" Press F1 to START");
                 Console.WriteLine(" Press F2 to RESET");
+                Console.WriteLine(" Press F3 to START SINGLE");
                 Console.WriteLine("");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(" Scores ...");
@@ -43,19 +44,21 @@ namespace GameCatch
                 Console.Write(" ");
                 Console.ForegroundColor = ConsoleColor.White;
                 var MENU = Console.ReadKey(); 
-                if (MENU.Key == ConsoleKey.F1)                                                       
+                if (MENU.Key == ConsoleKey.F1 || MENU.Key == ConsoleKey.F2)                                                       
                 { 
                     Console.WriteLine("");
                     Console.WriteLine(" Please enter your nickname: ");
                     Console.Write(" Player 1:");
-                    var playerOne = new HumanPlayer(); 
+
+                    var playerOne = new BotCpuPlayer();
                     playerOne.Name = Console.ReadLine();
                     playerOne.Symbol = HUNTER;
-    
+                
                     Console.Write(" Player 2:");
                     var playerTwo = new HumanPlayer();
                     playerTwo.Name = Console.ReadLine();
                     playerTwo.Symbol = HIRSCH;
+                   
                     int size = 11;
                     IPlayer playerWhooseTurnItCurrentlyIs = playerOne;
                     IPlayer playerThatStartsTheNextGame = playerOne;
