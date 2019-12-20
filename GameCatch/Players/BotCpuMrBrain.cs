@@ -4,12 +4,18 @@ using System.Text;
 
 namespace GameCatch.Players 
 {
-    class BotCpuMrBrain
+    class BotCpuMrBrain : IPlayer
     {
         public string Name { get; set; }
         public string Symbol { get; set; }
 
-       // public Direction GetNextMove()
+        
+        
+        public Direction GetNextMove()
+        {
+            return Direction.Up; 
+        }
+
         
     }
 }
