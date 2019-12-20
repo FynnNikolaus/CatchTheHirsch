@@ -50,7 +50,7 @@ namespace GameCatch
                     Console.WriteLine(" Please enter your nickname: ");
                     Console.Write(" Player 1:");
 
-                    var playerOne = new BotCpuPlayer();
+                    var playerOne = new BotCpuDrunkenPlayer();                          
                     playerOne.Name = Console.ReadLine();
                     playerOne.Symbol = HUNTER;
                 

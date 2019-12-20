@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace GameCatch.Players
 {
-    class BotCpuPlayer : IPlayer
+    class BotCpuPlayerCircleOfLife : IPlayer
     {
         public string Name { get; set; }
         public string Symbol { get; set; }
