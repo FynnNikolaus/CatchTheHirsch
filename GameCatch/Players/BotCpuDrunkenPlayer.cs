@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace GameCatch.Players
 {
@@ -12,6 +13,7 @@ namespace GameCatch.Players
         private Random _rnd = new Random();
         public Direction GetNextMove()
         {
+            Thread.Sleep(500);
             Direction random = (Direction)_rnd.Next(0,3);
             return random;
         }

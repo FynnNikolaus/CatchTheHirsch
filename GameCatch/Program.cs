@@ -44,7 +44,7 @@ namespace GameCatch
                 Console.Write(" ");
                 Console.ForegroundColor = ConsoleColor.White;
                 var MENU = Console.ReadKey(); 
-                if (MENU.Key == ConsoleKey.F1 || MENU.Key == ConsoleKey.F2)                                                       
+                if (MENU.Key == ConsoleKey.F1)                                                       
                 { 
                     Console.WriteLine("");
                     Console.WriteLine(" Please enter your nickname: ");

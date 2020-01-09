@@ -13,6 +13,7 @@ namespace GameCatch.Players
         
         public Direction GetNextMove()
         {
+            
             return Direction.Up; 
         }
 
