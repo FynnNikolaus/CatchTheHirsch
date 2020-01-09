@@ -30,12 +30,10 @@ namespace GameCatch
             { 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(Writings.gameTitel);
-                Console.WriteLine(" \u00A9 2019 Fynn Nikolaus. All rights reserved.");
                 Console.WriteLine("");
-                Console.WriteLine(" Welcome to catchTheHirsch MENU BAR");
-                Console.WriteLine(" Press F1 to START");
-                Console.WriteLine(" Press F2 to RESET");
-                Console.WriteLine(" Press F3 to START SINGLE");
+                Console.WriteLine(" Press F1 -> ONE PLAYER GAME");
+                Console.WriteLine(" Press F2 -> TWO PLAYER GAME");
+                Console.WriteLine(" Press F3 -> RESET");
                 Console.WriteLine("");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(" Scores ...");
@@ -43,15 +41,21 @@ namespace GameCatch
                 highScores.PrintHighScores();
                 Console.Write(" ");
                 Console.ForegroundColor = ConsoleColor.White;
-                var MENU = Console.ReadKey(); 
-                if (MENU.Key == ConsoleKey.F1)                                                       
+                var menu = Console.ReadKey(); 
+                if (menu.Key == ConsoleKey.F1 || menu.Key == ConsoleKey.F2)                                                       
                 { 
                     Console.WriteLine("");
                     Console.WriteLine(" Please enter your nickname: ");
+                   
                     Console.Write(" Player 1:");
-
-                    var playerOne = new BotCpuDrunkenPlayer();                          
-                    playerOne.Name = Console.ReadLine();
+                    var playerOne = new BotCpuDrunkenPlayer();
+                    if (menu.Key == ConsoleKey.F1)
+                    {
+                        var playerOne = new BotCpuDrunkenPlayer();
+                        playerOne.Name = "MR Brain";
+                    }
+                    if (menu.Key == ConsoleKey.F2)
+                        playerOne.Name = Console.ReadLine();
                     playerOne.Symbol = HUNTER;
                 
                     Console.Write(" Player 2:");
@@ -107,11 +111,15 @@ namespace GameCatch
                     }
                 }
 
-                if (MENU.Key == ConsoleKey.F2)
+                if (menu.Key == ConsoleKey.F3)
                 {
-                    highScores.resetAllScore();
+                    Console.WriteLine("Are your sure? y/n");
+                    var resetMenu = Console.ReadKey();
+                    if (resetMenu.Key == ConsoleKey.Y || resetMenu.Key == ConsoleKey.J)
+                        highScores.resetAllScore();      
                 }
-                if (MENU.Key != ConsoleKey.F1 || MENU.Key != ConsoleKey.F2 || MENU.Key != ConsoleKey.F3)
+
+                if (menu.Key != ConsoleKey.F1 || menu.Key != ConsoleKey.F2 || menu.Key != ConsoleKey.F3)
                 {
                     Console.Clear();
                 }
