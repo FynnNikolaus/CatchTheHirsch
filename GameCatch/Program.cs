@@ -45,19 +45,21 @@ namespace GameCatch
                 if (menu.Key == ConsoleKey.F1 || menu.Key == ConsoleKey.F2)                                                       
                 { 
                     Console.WriteLine("");
-                    Console.WriteLine(" Please enter your nickname: ");
-                   
+                    Console.WriteLine(" Please enter your nickname: "); 
                     Console.Write(" Player 1:");
-                    var playerOne = new BotCpuDrunkenPlayer();
+ 
                     if (menu.Key == ConsoleKey.F1)
                     {
                         var playerOne = new BotCpuDrunkenPlayer();
                         playerOne.Name = "MR Brain";
+                        playerOne.Symbol = HUNTER;
                     }
                     if (menu.Key == ConsoleKey.F2)
+                    {
+                        var playerOne = new BotCpuDrunkenPlayer();
                         playerOne.Name = Console.ReadLine();
-                    playerOne.Symbol = HUNTER;
-                
+                        playerOne.Symbol = HUNTER;
+                    }
                     Console.Write(" Player 2:");
                     var playerTwo = new HumanPlayer();
                     playerTwo.Name = Console.ReadLine();
