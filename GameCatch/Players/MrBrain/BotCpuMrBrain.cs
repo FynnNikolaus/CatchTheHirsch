@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GameCatch.Players 
+namespace GameCatch.Players.MrBrain 
 {
     class BotCpuMrBrain : IPlayer
     {
@@ -13,8 +13,8 @@ namespace GameCatch.Players
         
         public Direction GetNextMove()
         {
-            
-            return Direction.Up; 
+            // Mischung aus Consult und bei nur zwei Abstand von Line kommt aus Drunken player der Zufall 
+            return Direction.Down;
         }
 
         
