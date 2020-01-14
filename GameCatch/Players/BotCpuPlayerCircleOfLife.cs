@@ -10,7 +10,7 @@ namespace GameCatch.Players
         public string Name { get; set; }
         public string Symbol { get; set; }
         int Counter = 0;
-        public Direction GetNextMove()
+        public Direction GetNextMove(MoveContext context)
         {
 
             Thread.Sleep(500);

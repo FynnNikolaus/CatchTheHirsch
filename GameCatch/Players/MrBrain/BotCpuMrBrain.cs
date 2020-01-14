@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace GameCatch.Players.MrBrain 
 {
@@ -9,12 +10,48 @@ namespace GameCatch.Players.MrBrain
         public string Name { get; set; }
         public string Symbol { get; set; }
 
-        public Direction GetNextMove()
+        public Direction GetNextMove(MoveContext context)
         {
-            // Mischung aus Consult und bei nur zwei Abstand von Line kommt aus Drunken player der Zufall 
-            return Direction.Down;
-        }
+            var myPosition = context.Playingfield.GetPlayerPosition(this);
+            var otherPosition = context.Playingfield.GetPlayerPosition(context.OtherPlayer);
+            
+            Thread.Sleep(700);
 
-        
+            if (this.Symbol == Program.HIRSCH)
+            {
+                if (myPosition.Line < otherPosition.Line)
+                    return Direction.Up;
+                
+                else if (myPosition.Line > otherPosition.Line)
+                    return Direction.Down;
+                
+                else if (myPosition.Column < otherPosition.Column)
+                    return Direction.Right;
+                
+                else if (myPosition.Column < otherPosition.Column)
+                    return Direction.Left;
+            }
+
+            else 
+            {
+                if (myPosition.Column < otherPosition.Column)
+                    return Direction.Down;
+
+                else if (myPosition.Column > otherPosition.Column)
+                    return Direction.Up;
+
+                else if (myPosition.Line < otherPosition.Line)
+                    return Direction.Left;
+
+                else if (myPosition.Line < otherPosition.Line)
+                    return Direction.Right;
+            }
+
+            return Direction.Down;
+
+        }
     }
+
+
+
 }

@@ -1,4 +1,5 @@
 ﻿using GameCatch.Players;
+using GameCatch.Players.MrBrain;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -46,17 +47,17 @@ namespace GameCatch
                 { 
                     Console.WriteLine("");
                     Console.WriteLine(" Please enter your nickname: "); 
-                    Console.WriteLine(" Player 1:");
- 
+                    Console.Write(" Player 1:");
+                    IPlayer playerOne = new BotCpuMrBrain();
                     if (menu.Key == ConsoleKey.F1)
                     {
-                        var playerOne = new BotCpuDrunkenPlayer();
+                        playerOne = new BotCpuMrBrain();
                         playerOne.Name = "MR Brain";
                         playerOne.Symbol = HUNTER;
                     }
                     if (menu.Key == ConsoleKey.F2)
                     {
-                        var playerOne = new BotCpuDrunkenPlayer();
+                        playerOne = new HumanPlayer();
                         playerOne.Name = Console.ReadLine();
                         playerOne.Symbol = HUNTER;
                     }
@@ -83,11 +84,14 @@ namespace GameCatch
                         var moveResult = MoveResult.Successfull;
                         while (moveResult == MoveResult.Successfull)
                         {
-                            var direction = playerWhooseTurnItCurrentlyIs.GetNextMove();                                                            
+                            MoveContext context = new MoveContext();
+                            context.Playingfield = playingfield;
+                            context.OtherPlayer = OtherPlayer(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
+                            var direction = playerWhooseTurnItCurrentlyIs.GetNextMove(context);                                                            
                             moveResult = playingfield.MovePlayer(playerWhooseTurnItCurrentlyIs, direction);
                             
                             if(moveResult == MoveResult.Successfull)
-                                playerWhooseTurnItCurrentlyIs = PlayerSwitch(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
+                                playerWhooseTurnItCurrentlyIs = OtherPlayer(playerOne, playerTwo, playerWhooseTurnItCurrentlyIs);
                             
                             playingfield.Draw();
                             Console.ForegroundColor = colors[playerWhooseTurnItCurrentlyIs.Symbol];
@@ -108,7 +112,7 @@ namespace GameCatch
                             calculater.calculateScore(ResultForCalculate.Won, playerThatStartsTheNextGame, highScores);
                         }
                         SymbolSwitch(playerOne, playerTwo);
-                        playerThatStartsTheNextGame = PlayerSwitch(playerOne, playerTwo, playerThatStartsTheNextGame);
+                        playerThatStartsTheNextGame = OtherPlayer(playerOne, playerTwo, playerThatStartsTheNextGame);
                         highScores.SaveHighScore();
                     }
                 }
@@ -141,7 +145,7 @@ namespace GameCatch
             return ResultForCalculate.Lose;
         }
 
-        static IPlayer PlayerSwitch(IPlayer playerOne, IPlayer playerTwo, IPlayer actualPlayer)
+        static IPlayer OtherPlayer(IPlayer playerOne, IPlayer playerTwo, IPlayer actualPlayer)
         {
             if (actualPlayer == playerTwo)
                 return playerOne;

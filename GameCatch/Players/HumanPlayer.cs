@@ -9,7 +9,7 @@ namespace GameCatch
     {
         public string Name { get; set; }
         public string Symbol { get; set; }
-        public Direction GetNextMove()
+        public Direction GetNextMove(MoveContext context)
         {
             Direction result = Direction.Up;
             bool validPress = false;

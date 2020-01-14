@@ -9,6 +9,6 @@ namespace GameCatch.Players
         string Name { get; set; }
         string Symbol { get; set; }
 
-        Direction GetNextMove();
+        Direction GetNextMove(MoveContext context);
     }
 }

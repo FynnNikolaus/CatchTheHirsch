@@ -11,7 +11,7 @@ namespace GameCatch.Players
         public string Name { get; set; }
         public string Symbol { get; set; }
         private Random _rnd = new Random();
-        public Direction GetNextMove()
+        public Direction GetNextMove(MoveContext context)
         {
             Thread.Sleep(500);
             Direction random = (Direction)_rnd.Next(0,3);

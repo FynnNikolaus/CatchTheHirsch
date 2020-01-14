@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameCatch
 {
-    class PlayingField : IOtherPlayers
+    class PlayingField : IReadOnlyPlayingfield
     {
         const string BELOW_LEFT_CORNER = "\u255A";
         const string BELOW_RIGHT_CORNER = "\u255D";
@@ -16,17 +16,10 @@ namespace GameCatch
         const string VERTICAL_LINE = "\u2551";
         private readonly int _size;
         private readonly string[,] _playingfield;
-       
-        public PlayingField(int size)
+   
+        public Position GetPlayerPosition(IPlayer player)
         {
-            _size = size;
-            _playingfield = new string[size, size];
-            ClearPlayingField();
-        }
-
-        private Position GetPlayerPosition(IPlayer player)
-        {
-            Position playerset = new Position();
+            var playerset = new Position();
 
             playerset.Line = -1;
             playerset.Column = -1;
@@ -45,9 +38,16 @@ namespace GameCatch
             return playerset;
         }
 
+        public PlayingField(int size)
+        {
+            _size = size;
+            _playingfield = new string[size, size];
+            ClearPlayingField();
+        }
+
         public MoveResult MovePlayer(IPlayer player, Direction playerMove)
         {
-            var playerPosition = GetPlayerPosition(player);
+            Position playerPosition = GetPlayerPosition(player);
             if (playerMove == Direction.Up)
             {
                 if (playerPosition.Line - 1 < 0)
