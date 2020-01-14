@@ -1,11 +1,12 @@
 ﻿using GameCatch.Players;
+using GameCatch.Players.MrBrain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace GameCatch
 {
-    class PlayingField
+    class PlayingField : IOtherPlayers
     {
         const string BELOW_LEFT_CORNER = "\u255A";
         const string BELOW_RIGHT_CORNER = "\u255D";

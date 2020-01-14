@@ -46,7 +46,7 @@ namespace GameCatch
                 { 
                     Console.WriteLine("");
                     Console.WriteLine(" Please enter your nickname: "); 
-                    Console.Write(" Player 1:");
+                    Console.WriteLine(" Player 1:");
  
                     if (menu.Key == ConsoleKey.F1)
                     {
